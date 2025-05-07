@@ -20,7 +20,7 @@
 
 #let question(expr) =  text(fill: questionColor)[
   #questionCount.update(q => q + 1)
-  *Frage* #context questionCount.get(): #expr
+  #text(weight: "bold")[Frage #context questionCount.get():] #expr
 ]
 
 #let subQuestion(expr) =  text(fill: questionColor)[
