@@ -20,12 +20,12 @@
 
 #let question(expr) =  text(fill: questionColor)[
   #questionCount.update(q => q + 1)
-  *Frage* #context questionCount.get(): #expr
+  #text(weight: "bold")[Frage #context questionCount.get():] #expr
 ]
 
 #let subQuestion(expr) =  text(fill: questionColor)[
   #questionCount.update(q => q + 1)
- #h(2em)*Frage* #context questionCount.get(): #expr
+ #h(2em)#text(weight: "bold")[Frage #context questionCount.get()]: #expr
 ]
 
 #let answer(expr) =  text(fill: answerColor)[
@@ -79,10 +79,8 @@ die auf Tablets oder Handys laufen können. \
 
 #question("Wie sieht es mit der Verfügbarkeit für die Web-Version aus (nur im Intranet/VPN oder öffentlich zugänglich)?")\
 #answer("Die Web-Version soll mit entsprechenden Sicherheitsvorkehrungen öffentlich zugänglich sein.")\
-#subQuestion("Wie sollen die Sicherheitsvorkehrungen aussehen? Gibt es bestehende
-        Sicherheitsprotokolle, die aktuell verwendet werden?")\
-#subAnswer("Aktuell gibt es keine Web-Applikationen in unserem Portfolio. Für die Anwendung
-        sollte eine Authentifikation mit Benutzername und Passwort verwendet werden.")\
+#subQuestion("Wie sollen die Sicherheitsvorkehrungen aussehen? Gibt es bestehendevSicherheitsprotokolle, die aktuell verwendet werden?")\
+#subAnswer("Aktuell gibt es keine Web-Applikationen in unserem Portfolio. Für die Anwendung sollte eine Authentifikation mit Benutzername und Passwort verwendet werden.")\
 #question("Welche Display-Größen sollen für diese Web-Applikation unterstützt werden?")\
 #answer("Das meistverwendete Handy ist das IPhone 14, welches 6,1 Zoll groß ist und das meistverwendete Tablet ist das IPad Air, es hat bis zu 13 Zoll.")\
 #intern("IPhone 14: 2532 x 1170 Pixel und IPad Air: 2732 x 2048 Pixel")\
@@ -101,8 +99,7 @@ geeignet bereitgestellt werden.\
 #intern("Für genaue Definition von Personaldaten siehe Datenmodellierung.")\
 #question("Sollen Handwerkbetriebe in der Lage sein, dies selbst zu definieren?")\
 #answer("Ja, der Umfang der betroffenen Daten soll individuell konfigurierbar sein, um so die Software auf den jeweiligen Betrieb zuschneiden zu können.")\
-#intern("Auf gleicher Admin-Seite wie das geplante Herunterfahren konfigurierbar. Dort können
-       die Typen von Daten angezeigt werden, beispielsweise „Personaldaten“ und „Aufträge“.")\
+#intern("Auf gleicher Admin-Seite wie das geplante Herunterfahren konfigurierbar. Dort können die Typen von Daten angezeigt werden, beispielsweise „Personaldaten“ und „Aufträge“.")\
 #question("Gibt es bereits Richtlinien / Regulierungen, die umgesetzt werden können?")\
 #answer("Die Anwendung muss die Daten DSGVO-konform verarbeiten.")\
 
@@ -121,8 +118,7 @@ Es sollen auf einfache Weise Kunden-, Termin-, Material-, Auftrags-, Geräte- un
 #answer("Die Attribute stehen fest. Alle Änderungen auf dieser Ebene müssen per Plugin realisiert werden, die in das bestehende System eingreifen.")\
 #question("Was soll beim Anlegen passieren, wenn ein Eintrag bereits existiert?")\
 #answer("Es soll eine Fehlermeldung ausgegeben werden.")\
-#subQuestion("Und die Datenbasis wird dann nicht verändert, es wird nur eine Fehlermeldung
-        gezeigt, verstehe ich das richtig?")\
+#subQuestion("Und die Datenbasis wird dann nicht verändert, es wird nur eine Fehlermeldung gezeigt, verstehe ich das richtig?")\
 #subAnswer("Ja, genau so stellen wir uns das vor.")\
 #question("Gibt es Standardwerte beim Anlegen oder müssen alle Attribute angegeben werden?")\
 #answer("In der Softwarekonfiguration des Administrators können die Unternehmen Standardwerte und optionale Werte, die nicht gesetzt werden müssen, definieren. Alle anderen Felder brauchen beim Anlegen einen Wert.")\
@@ -130,35 +126,25 @@ Es sollen auf einfache Weise Kunden-, Termin-, Material-, Auftrags-, Geräte- un
 #answer("Nein, für Details siehe /LF70/")\ //TODO: add reference
 #question("Welche Daten sollen geändert werden können? Soll bei manchen Daten nachgefragt werden, bevor die Änderung ausgeführt wird?")\
 #answer("Auch das sollte jedes Unternehmen für sich bestimmen und anpassen können.")\
-#subQuestion("Welche Daten sollen standardmäßig geändert werden können und bei welchen soll
-        vor der Änderung nachgefragt werden?")\
-#subAnswer("Bei Personaldaten und Aufträge soll gefragt werden, bevor eine Änderung ausgeführt
-        wird. Alle Felder sollen standardmäßig editierbar sein.")\
+#subQuestion("Welche Daten sollen standardmäßig geändert werden können und bei welchen soll vor der Änderung nachgefragt werden?")\
+#subAnswer("Bei Personaldaten und Aufträge soll gefragt werden, bevor eine Änderung ausgeführt wird. Alle Felder sollen standardmäßig editierbar sein.")\
 #question("Soll es möglich sein einen ähnlichen Suchbegriff wie das zu suchendes Wort zu nutzen? (Z.B. Beim Suchwort „metallschnaider“ soll „Metallschneider“ gefunden werden)")\
 #answer("Mehr Details siehe /LF70/")\ //TODO: add reference
 #question("Möchten Sie auch filtern können, z. B. die Ergebnisse einer Personalsuche nach Alter sortieren können?")\
 #answer("Ja, mehr Details siehe /LF70/")\ //TODO: add reference
 #question("Für welchen Einsatz möchten Sie importieren und exportieren; ausschließlich zur Datensicherung oder auch für andere Zwecke?")\
 #answer("Importieren soll neben der Datensicherung auch für exportierte Daten der alten Systeme möglich sein. Die Exportfunktion soll druckbare Formate unterstützen.")\
-#subQuestion("Gibt es hierfür bereits bestehende Formate oder welche, die Sie bevorzugen (Excel,
-        CSV, PDF), oder soll ein eigener Format-Standard erstellt werden? ")\
-#subAnswer("Die Unternehmen haben unterschiedliche Formate. Hier dürfen Sie sich einen
-        Standard CSV-Format überlegen. Die einzelnen Unternehmen müssen dann ihre alten Exporte
-        in unseren Standard konvertieren. (Wir bieten hierzu auch Dienstleistungen an, in denen 
-        wir diese Arbeit für den Kunden übernehmen. Darüber müssen Sie sich aber keine Gedanken
-        machen.) Als druckbares Format zum Exportieren sollte zumindest PDF unterstützt werden.")\
+#subQuestion("Gibt es hierfür bereits bestehende Formate oder welche, die Sie bevorzugen (Excel, CSV, PDF), oder soll ein eigener Format-Standard erstellt werden? ")\
+#subAnswer("Die Unternehmen haben unterschiedliche Formate. Hier dürfen Sie sich einen Standard CSV-Format überlegen. Die einzelnen Unternehmen müssen dann ihre alten Exporte in unseren Standard konvertieren. (Wir bieten hierzu auch Dienstleistungen an, in denen wir diese Arbeit für den Kunden übernehmen. Darüber müssen Sie sich aber keine Gedanken machen.) Als druckbares Format zum Exportieren sollte zumindest PDF unterstützt werden.")\
 
 Eine zentrale Datenhaltung sowie ein Mehrbenutzersystem müssen realisiert werden. \
 
 #question("Bedeutet „zentral“, dass es sich um ein System in der Cloud oder lokal handelt?")\
 #answer("Jedes Unternehmen verwendet seinen eigenen lokalen Server.")\
 #question("Sehen Sie eine Backup-Strategie vor? (Bspw. eine komplette Spiegelung der Daten)")\
-#subQuestion("Wenn ja, soll dies durch eine externe Software-Lösung umgesetzt werden oder durch
-        uns?")\
-#subAnswer("Wir haben in unseren alten Lösungen immer Borg für verschlüsselte Backups 
-        verwendet. Hier sollte die Borg Schnittstelle für automatische Backups integriert werden.")\
-#intern("Dokumentation zum BackUp-System Borg siehe 
-        https://borgbackup.readthedocs.io/en/stable/")\
+#subQuestion("Wenn ja, soll dies durch eine externe Software-Lösung umgesetzt werden oder durch uns?")\
+#subAnswer("Wir haben in unseren alten Lösungen immer Borg für verschlüsselte Backups verwendet. Hier sollte die Borg Schnittstelle für automatische Backups integriert werden.")\
+#intern("Dokumentation zum BackUp-System Borg (siehe https://borgbackup.readthedocs.io/en/stable/)")\
 #question("Sollen Backups / andere Daten nach einer gewissen Zeit gelöscht werden?")\
 #answer("Uns ist nur wichtig, dass sich die Datenhaltung nach der DSGVO richtet.")\
 === Anwendungsbereich
@@ -237,10 +223,7 @@ integriert werden. \
 #answer("Nur die nötigen Personaldaten in Bezug auf die Gehälter der Mitarbeitenden sollen angezeigt werden. Das beinhaltet die Mitarbeiter-ID, Name, IBAN, Gehalt und die Gehaltsabrechnung.")\
 #question("Welche Schnittstellen sind vorhanden?")\
 #answer("Das müssten Sie in der Dokumentation der FiBuSys Software lesen, das ist uns nicht bekannt.")\
-#intern("Die Recherche hat ergeben, dass eine REST-API vorhanden ist: 
-       Der Endpoint /getLohn?mitarbeiter=<MitarbeiterID>, welche von der Mitarbeiter-ID abhängig ist, 
-       gibt den Lohn des entsprechenden Mitarbeiters zurück. Eine Beispiel Anfrage für den Mitarbeiter 
-       mit der Mitarbeiter-ID 0815 sähe dann so aus:
+#intern("Die Recherche hat ergeben, dass eine REST-API vorhanden ist: Der Endpoint /getLohn?mitarbeiter=<MitarbeiterID>, welche von der Mitarbeiter-ID abhängig ist, gibt den Lohn des entsprechenden Mitarbeiters zurück. Eine Beispiel Anfrage für den Mitarbeiter mit der Mitarbeiter-ID 0815 sähe dann so aus:
 ")
 
 #pagebreak()
@@ -281,9 +264,7 @@ werden können.\
 #question("Welche Daten sind schon vorhanden?")\
 #answer("Das ist abhängig vom vorherigen System, also unterschiedlich. Auf fehlende Felder soll beim Import hingewiesen werden.")\
 #subQuestion("Soll der Import bei fehlenden Feldern automatisch abgebrochen werden?")\
-#subAnswer("In einem Dialogfenster soll es möglich sein, einen Wert für das fehlende Feld zu 
-        definieren. Der Importprozess kann jedoch auch über dieses Dialogfenster abgebrochen 
-        werden.")\
+#subAnswer("In einem Dialogfenster soll es möglich sein, einen Wert für das fehlende Feld zu definieren. Der Importprozess kann jedoch auch über dieses Dialogfenster abgebrochen werden.")\
 #question("Soll dieser Prozess automatisch passieren oder mit manuellem Ex- und Import?")\
 #answer("Aufgrund der vielen verschiedenen Formate ist dieser Prozess nur durch manuelles Exportieren und Importieren möglich.")\
 #question("Was ist mit Attributen, die im aktuellen System existieren, jedoch nicht in das neue System übernommen werden können?")\
@@ -552,8 +533,9 @@ werden können.\
         #question("Sollen die Suchergebnisse sortiert werden? Wenn ja, nach welchen Attributen soll sortiert werden können und was ist die Standardsortierung?")\
         #answer("Die Suchergebnisse sollen nach Anfangs-, End- und Erstelldatum und (bei Kundenaufträgen) nach dem Auftragstyp sortiert werden können. Standardmäßig sollen die neusten Aufträge zuerst angezeigt werden.")\
         #question("Welche Attribute sollen in der Ergebnisliste angezeigt werden?")\
-        #answer("- Kundenaufträge: Identifikationsnummer, Titel
-        	        - Lieferanten und Kunden: Name, Telefonnummer, E-Mail, Adresse")\
+        #answer([Folgende Attribute:
+        - Kundenaufträge: Identifikationsnummer, Titel
+        - Lieferanten und Kunden: Name, Telefonnummer, E-Mail, Adresse])\
         #question("Soll eine Maximalanzahl an anzuzeigenden Objekten geben? Soll eine Seitenauswahl existieren?")\
         #answer("Die Ergebnisse sollen in Seiten von 50 Objekten geteilt werden. Eine Navigation zwischen den Seiten wird dafür ebenfalls benötigt.")\
 
@@ -561,21 +543,16 @@ werden können.\
         sämtliche Informationen über das Element mit allen Referenzen direkt angezeigt werden.\
 
         #question("Soll diese Detailansicht sich im Vollbild öffnen, als Popup agieren oder innerhalb der Liste sich expandieren?")\
-        #answer("- Die Detailansicht soll die zuvor existierende Benutzeroberfläche komplett 
-                 ersetzen (im Vollbild öffnen), um so die große Masse an Daten übersichtlich 
-                 darstellen zu können.
-                - Gleichzeitig soll es einfach sein über eine Navigationsleiste schnell wieder in
-                 die vorherige Position in der Liste zurückzukehren")\
+        #answer([Wir möchten folgendes:
+        - Die Detailansicht soll die zuvor existierende Benutzeroberfläche komplett ersetzen (im Vollbild öffnen), um so die große Masse an Daten übersichtlich darstellen zu können.
+        - Gleichzeitig soll es einfach sein über eine Navigationsleiste schnell wieder in die vorherige Position in der Liste zurückzukehren])\
         #question("Welche Elemente können mit der Detailansicht betrachtet werden?")\
         #answer("Wir möchten, dass alle gespeicherten Elemente angezeigt werden, zur Not in einer scrollbaren Übersicht, wenn es zu viele für eine Seite sind.")\
         #question("Soll die Ansicht in verschiedene Sektionen geteilt werden? Wenn ja, welche Sektionen sollen existieren? Wie sind die Sektionen aufgebaut?")\
-        #answer("- Für die Übersichtlichkeit sind verschiedene Sektionen innerhalb der 
-                 Benutzeroberfläche zur Gruppierung vorhergesehen.
-                - Welche Sektionen es genau sein sollen, sollen Ihre UI-Entwickler
-                 entscheiden. Das kann man bestimmt am besten beim Entwerfen der UI
-                 machen.
-                - Sektionen so wie Suche Listenbasiert -> Gleiche Möglichkeiten von 
-                 Suche + Filter soll verfügbar sein")\
+        #answer([Hier stellen wir uns folgendes vor:
+        - Für die Übersichtlichkeit sind verschiedene Sektionen innerhalb der Benutzeroberfläche zur Gruppierung vorhergesehen.
+        - Welche Sektionen es genau sein sollen, sollen Ihre UI-Entwickler entscheiden. Das kann man bestimmt am besten beim Entwerfen der UI machen.
+        - Sektionen so wie Suche Listenbasiert -> Gleiche Möglichkeiten von Suche + Filter soll verfügbar sein])\
         #question("Wie sollen die Referenzen funktionieren? Soll eine Navigation zu den Referenzen existieren?")\
         #answer("Der Endnutzer soll auf Referenzen klicken können. Beim Klick gelangt der Nutzer zu der jeweiligen Detailansicht des Referenzobjektes (gleiches Verhalten: Vollbild + Navigationsleiste)")\
         #question("Sollen gewisse Referenzinformationen bereits ohne weitere Interaktion in der Detailansicht angezeigt werden? Wenn ja, welche?")\
@@ -595,33 +572,20 @@ werden können.\
         #question("Welche verschiedenen Weiterverarbeitungsschritte muss ein Auftrag in Fibusys durchlaufen? Welche Zustände ergeben sich daraus?")\
         #answer("Die Zustände lauten wie folgt: gestartet, laufend, ausgeführt, Rechnung gestellt, Rechnung beglichen, in Mahnung (-> Rechnung NICHT beglichen), archiviert (10 Jahre).")\
         #question("Welche Daten sollen an das Finanzbuchhaltungssystem übertragen werden? Welche Daten gibt das Finanzbuchhaltungssystem zurück?")\
-        #answer("- An das Finanzbuchhaltungssystem sollten folgende Daten übertragen
-                 werden: Auftragsnummer Auftragsdatum Kundeninformationen (Name, 
-                 Adresse, Kontaktdaten), Auftragspositionen (Beschreibung, Menge, Preis), 
-                 Gesamtbetrag, Zahlungsbedingungen, Lieferdatum
-                - Das Finanzbuchhaltungssystem gibt typischerweise folgende Daten zurück: 
-                 Aktueller Status des Auftrags, Rechnungsnummer, Zahlungsstatus, eventuelle 
-                 Fehlermeldungen oder Warnungen")\
+        #answer([Dafür haben wir uns überlegt:
+        - An das Finanzbuchhaltungssystem sollten folgende Daten übertragen werden: Auftragsnummer Auftragsdatum Kundeninformationen (Name, Adresse, Kontaktdaten), Auftragspositionen (Beschreibung, Menge, Preis), Gesamtbetrag, Zahlungsbedingungen, Lieferdatum
+        - Das Finanzbuchhaltungssystem gibt typischerweise folgende Daten zurück: Aktueller Status des Auftrags, Rechnungsnummer, Zahlungsstatus, eventuelle Fehlermeldungen oder Warnungen])\
         #question("Soll die Übertragung der Daten manuell oder automatisiert funktionieren? Unter welchen Bedingungen werden die Daten übertragen?")\
         #answer("Nach Erstellung in Software soll automatisch mit Fibu synchronisiert werden. Hierbei können Aufträge gebündelt werden, um Last zu vermeiden. Maximale Verzögerung: 5 Minute")\
         #question("Wann passiert eine Aktualisierung? Sollen die Daten nur angezeigt werden, oder sollen Benachrichtigungen bei Aktualisierung erstellt werden?")\
-        #answer("- Eine Aktualisierung passiert in regelmäßigen Abständen. Eine stündliche
-                 Aktualisierung sollte dabei ausreichend sein.
-                - Benachrichtigungen werden bereits durch das Finanzbuchhaltungssystem 
-                 erstellt, weswegen ein separates Benachrichtigungssystem nicht benötigt 
-                 wird.")\
-        #intern("Erfolgt die Synchronisierung über eine API oder über einen Dateiupload? 
-        Ruft das FibuSys uns auf oder müssen wir das System immer wieder anfragen?
-        -> Antowort in Dokumentation von FibuSys")\
-        #intern("System muss regelmäßig „gepollt“ werden um Informationen zu erhalten, da
-        das System keine Ahnung von unserer Präsenz hat.")\
-          #intern("Auch hier bietet das FibuSys bietet dafür eine HTTP REST Schnittstelle an,
-        die im JSON-Format kommuniziert
-
-        Der Endpoint ist /getOrders
+        #answer([Da stellen wir uns vor:
+        - Eine Aktualisierung passiert in regelmäßigen Abständen. Eine stündliche Aktualisierung sollte dabei ausreichend sein.
+        - Benachrichtigungen werden bereits durch das Finanzbuchhaltungssystem erstellt, weswegen ein separates Benachrichtigungssystem nicht benötigt wird.])\
+        #intern("Erfolgt die Synchronisierung über eine API oder über einen Dateiupload? Ruft das FibuSys uns auf oder müssen wir das System immer wieder anfragen? -> Antowort in Dokumentation von FibuSys")\
+        #intern("System muss regelmäßig „gepollt“ werden um Informationen zu erhalten, da das System keine Ahnung von unserer Präsenz hat.")\
+        #intern([Auch hier bietet das FibuSys bietet dafür eine HTTP REST Schnittstelle an, die im JSON-Format kommuniziert. Der Endpoint ist /getOrders\
         GET <base-url>/getOrders
-        RESPONSE: 200 OK
-           ")
+        RESPONSE: 200 OK])
         ```JSON
 {
     "Orders": [
@@ -662,24 +626,21 @@ werden können.\
         #question("Sollen kleine Werkzeuge (z.B. die in einem Werkzeugkasten) zusammengefasst werden können?")\
         #answer("So kleines Werkzeug muss nicht beachtet werden, in diesem Fall wäre der „Werkzeugkasten“ das, was gespeichert wird (Informationen über Inhalt kann dann z.B. im Freitext gespeichert werden)")\
         #question("Welche Attribute besitzt ein Werkzeug und eine Anlage? Sollen optionale, benutzerdefinierte Felder erlaubt sein?")\
-        #answer("- Werkzeug: Name/Bezeichnung, Hersteller, Zustand, Modellnummer,
-                 Seriennummer, Wartungsanforderungen
-        	                - Referenz zu Aufträgen, bei denen es gebraucht wird
-                        - Bilder (sollen immer aktuellen Zustand des Werkzeuges zeigen), 
-                        siehe /LF100/
-                - Anlage: Name/Bezeichnung, Hersteller, Modellnummer, Seriennummer,
-                 Betriebsstatus, Standort, Baujahr, Wartungsanforderungen")\
+        #answer([Diese Attribute:
+        - Werkzeug: Name/Bezeichnung, Hersteller, Zustand, Modellnummer, Seriennummer, Wartungsanforderungen
+        - Referenz zu Aufträgen, bei denen es gebraucht wird
+        - Bilder (sollen immer aktuellen Zustand des Werkzeuges zeigen), siehe /LF100/
+        - Anlage: Name/Bezeichnung, Hersteller, Modellnummer, Seriennummer, Betriebsstatus, Standort, Baujahr, Wartungsanforderungen])\
         #question("Wie sieht die Verwaltung der Werkzeuge und Anlagen aus? Welche Operationen werden für die Verwaltung benötigt?")\
         #answer("Erstellen, Entfernen, Bearbeiten")\
         #question("Welche Referenzen bestehen zwischen Werkzeugen und Anlagen sowie andere Elemente (z. B. Zuweisung zum Mitarbeiter)?")\
-        #answer("- Zu beiden: Referenzen zu Bestellungen/Rechnungen (z.B. Wartungskosten)
-                 - Zuweisung zu Auftrag, der das Werkzeug oder die Anlage verwendet/
-                 benötigt")\
+        #answer([Folgende:
+        - Zu beiden: Referenzen zu Bestellungen/Rechnungen (z.B. Wartungskosten)
+        - Zuweisung zu Auftrag, der das Werkzeug oder die Anlage verwendet/benötigt])\
         #question("Ist für die Verwaltung dieser Elemente auch eine Suche angedacht?")\
-        #answer("- Nach den Elementen soll auch gesucht werden können (nach Modellnummer
-                 und Name)
-                - Ebenfalls sollen Filter zum Einsatz kommen, die nach dem 
-                 Zustand/Betriebsstatus und Hersteller filtern")\
+        #answer([Ja:
+        - Nach den Elementen soll auch gesucht werden können (nach Modellnummer und Name)
+        - Ebenfalls sollen Filter zum Einsatz kommen, die nach dem Zustand/Betriebsstatus und Hersteller filtern])\
     ],
     [
         /LF100/

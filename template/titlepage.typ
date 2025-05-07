@@ -96,9 +96,12 @@
   text("Institut für Automation und angewandte Informatik (IAI)")
   v(0 * page-grid)
   text("Karlsruher Institut für Technologie (KIT)")
-  v(3 * page-grid)
+  v(2 * page-grid)
 
   text("Bearbeitet von")
   v(0* page-grid)
-  text(size: 15pt, authors.map(author => author.name).join(" und "))
+  grid(columns: 2, gutter: 10pt,
+    ..authors.map(it => text(size: 15pt)[#it.name])
+  )
+  //text(size: 15pt, authors.map(author => author.name).join([\ ])))
 }

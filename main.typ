@@ -9,6 +9,21 @@
     (name: "Matteo Kosina", student-id: "123223", course: "TINF23B1", course-of-studies: "Informatik" //company: (
     //   (name: "ABC S.L.", post-code: "08005", city: "Barcelona", country: "Spain")
     ),
+    (name: "Tim Siefken", student-id: "123223", course: "TINF23B1", course-of-studies: "Informatik" //company: (
+    //   (name: "ABC S.L.", post-code: "08005", city: "Barcelona", country: "Spain")
+    ),
+    (name: "Marc Lehmann", student-id: "123223", course: "TINF23B1", course-of-studies: "Informatik" //company: (
+    //   (name: "ABC S.L.", post-code: "08005", city: "Barcelona", country: "Spain")
+    ),
+    (name: "Jasmin Förstel", student-id: "123223", course: "TINF23B1", course-of-studies: "Informatik" //company: (
+    //   (name: "ABC S.L.", post-code: "08005", city: "Barcelona", country: "Spain")
+    ),
+    (name: "Sinan Haslamann", student-id: "123223", course: "TINF23B1", course-of-studies: "Informatik" //company: (
+    //   (name: "ABC S.L.", post-code: "08005", city: "Barcelona", country: "Spain")
+    ),
+    (name: "Max Mechler", student-id: "123223", course: "TINF23B1", course-of-studies: "Informatik" //company: (
+    //   (name: "ABC S.L.", post-code: "08005", city: "Barcelona", country: "Spain")
+    )
   ),
   type-of-thesis: "Programmentwurf",
   // acronyms: acronyms, // displays the acronyms defined in the acronyms dictionary
