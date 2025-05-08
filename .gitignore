@@ -1,2 +1,5 @@
 # Visual Paradigm backup files
 *.vpp.bak*
+
+# apple .DS_Store
+.DS_Store
