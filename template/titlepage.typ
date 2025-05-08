@@ -23,12 +23,11 @@
   course,
   semester,
 ) = {
-
   // ---------- Page Setup ---------------------------------------
 
-  set page(     
+  set page(
     // identical to document
-    margin: (top: 4cm, bottom: 3cm, left: 4cm, right: 3cm),   
+    margin: (top: 4cm, bottom: 3cm, left: 4cm, right: 3cm),
   )
   // The whole page in `title-font`, all elements centered
   set text(font: title-font, size: page-grid)
@@ -36,44 +35,43 @@
 
   // ---------- Logo(s) ---------------------------------------
 
-  if logo-left != none and logo-right == none {           // one logo: centered
-    place(                                
-      top + center,
-      dy: -3 * page-grid,
-      box(logo-left, height: 3 * page-grid) 
-    )
-  } else if logo-left != none and logo-right != none {    // two logos: left & right
-    place(
-      top + left,
-      dy: -4 * page-grid,
-      box(logo-left, height: 3 * page-grid) 
-    )
-    place(
-      top + right,
-      dy: -4 * page-grid,
-      box(logo-right, height: 3 * page-grid) 
-    )
+  if logo-left != none and logo-right == none {
+    // one logo: centered
+    place(top + center, dy: -3 * page-grid, box(
+      logo-left,
+      height: 3 * page-grid,
+    ))
+  } else if logo-left != none and logo-right != none {
+    // two logos: left & right
+    place(top + left, dy: -4 * page-grid, box(logo-left, height: 3 * page-grid))
+    place(top + right, dy: -4 * page-grid, box(
+      logo-right,
+      height: 3 * page-grid,
+    ))
   }
 
   // ---------- General -------------------------------------
-  
+
   // class
   v(3 * page-grid)
   text(size: 1.5 * page-grid, class)
   v(page-grid)
 
-  par(leading: 0.6 * page-grid, type-of-thesis + "\n" + course + "\n" + semester)
+  par(
+    leading: 0.6 * page-grid,
+    type-of-thesis + "\n" + course + "\n" + semester,
+  )
   v(page-grid)
 
   // ---------- Title ---------------------------------------
 
-       
+
   text(weight: "bold", fill: luma(80), size: 1.5 * page-grid, title)
   v(4 * page-grid)
-  
+
 
   // ---------- Sub-Title-Infos ---------------------------------------
-  // 
+  //
   // type of thesis (optional)
   // if (type-of-thesis != none and type-of-thesis.len() > 0) {
   //   align(center, text(size: page-grid, type-of-thesis))
@@ -81,7 +79,11 @@
   // }
 
   // course of studies
-  text(size: 14pt, TITLEPAGE_SECTION_B.at(language) + authors.map(author => author.course-of-studies).dedup().join(" | "),)
+  text(
+    size: 14pt,
+    TITLEPAGE_SECTION_B.at(language)
+      + authors.map(author => author.course-of-studies).dedup().join(" | "),
+  )
   v(0.25 * page-grid)
 
   // university
@@ -99,8 +101,9 @@
   v(2 * page-grid)
 
   text("Bearbeitet von")
-  v(0* page-grid)
-  grid(columns: 2, gutter: 10pt,
+  v(0 * page-grid)
+  grid(
+    columns: 2, gutter: 10pt,
     ..authors.map(it => text(size: 15pt)[#it.name])
   )
   //text(size: 15pt, authors.map(author => author.name).join([\ ])))
