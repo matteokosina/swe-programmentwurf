@@ -1046,3 +1046,5 @@ entfällt
     "b) Eine Protokollierfunktion und ein Login-Vorgang sind für die Anwendung nicht 
     erforderlich (in der Realität natürlich schon!)."
 )
+
+#include "diagram_raws/UseCaseDiagram/usecasediagram.typ"
