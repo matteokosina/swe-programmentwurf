@@ -7,69 +7,82 @@ Um es für den Benutzer möglichst einfach zu halten, haben wir uns dafür entsc
 
 == Verwaltungssoftware - Hauptsystem
 
-Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und deren Beziehung zu den verschiedenen Akteuren dar. Diese übergeordnete Darstellung bietet einen Gesamtüberblick über die Systemfunktionen, wie es für UML-Use Case Diagramme typisch ist.
+Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und deren Beziehung zu den verschiedenen Akteuren dar. Diese übergeordnete Darstellung bietet einen Gesamtüberblick über die Systemfunktionen.
 
-=== Akteure und ihre Rollen
+*Akteure und ihre Rollen*
 
 - *Gast*: Ein temporärer Benutzer, dem individuelle, zeitlich begrenzte Berechtigungen zugewiesen werden können. Diese beschränkten Zugriffsrechte ermöglichen es externen Personen, bestimmte Funktionen zu nutzen, ohne vollständigen Systemzugriff zu erhalten.
 
 - *Kaufmännischer Mitarbeiter*: Verfügt über die Berechtigung, Berechtigungen anzupassen und Gastzugänge anzulegen. Diese Rolle stellt eine Verbindung zwischen der Verwaltung und den operativen Aspekten des Systems dar.
 
-- *Vorgesetzter*: Eine Führungsposition, die hierarchisch über dem kaufmännischen Mitarbeiter steht und erweiterte Befugnisse hat.
+- *Vorgesetzter*: Eine Führungsposition, die hierarchisch über dem kaufmännischen Mitarbeiter steht.
 
 - *Administrator*: Hat umfassende Berechtigungen im System, kann Verwaltungsfunktionen ausführen und ist für die grundlegende Systemkonfiguration verantwortlich.
 
-- *Kunde*: Der Endnutzer der Dienstleistungen oder Produkte, der mit dem System über eine definierte Schnittstelle interagiert.
+- *Kunde*: Der Endnutzer der Dienstleistungen oder Produkte, der in dem System über eine definierte Schnittstelle bezahlen kann.
 
 - *FiBuSys*: Ein externes Finanzbuchhaltungssystem, das an die Hauptsoftware angebunden ist und über die Schnittstelle mit den Bezahlvorgängen kommuniziert.
 
-=== Zentrale Use Cases
+*Zentrale Use Cases*
 
 - *Berechtigungen anpassen*: Ermöglicht dem kaufmännischen Mitarbeiter, Zugriffsrechte für verschiedene Benutzer zu definieren und zu modifizieren. Dies ist entscheidend für die Sicherheit und Zugriffssteuerung im System.
 
-- *Gastzugang anlegen*: Dieser Use Case wird vom "Berechtigungen anpassen" Fall durch eine "Include"-Beziehung eingebunden, was bedeutet, dass er zwingend Teil des übergeordneten Prozesses ist. Hiermit können temporäre Zugänge für externe Akteure geschaffen werden.
+- *Gastzugang anlegen*: Dieser Use Case wird vom "Berechtigungen anpassen" Fall durch eine "Include"-Beziehung eingebunden, was bedeutet, dass er zwingend Teil des übergeordneten Prozesses ist. Hiermit können temporäre Zugänge für externe Akteure angelegt werden.
 
 - *GUI Konfigurieren*: Ermöglicht die Anpassung der Benutzeroberfläche entsprechend den Bedürfnissen der verschiedenen Benutzergruppen.
 
-- *Verwalten*: Ein umfassender Use Case, der durch ein Sternchen (\*) als zentraler Anwendungsfall gekennzeichnet ist und im zweiten Diagramm weiter verfeinert wird. Der Administrator hat hier die Hauptverantwortung.
+- *Verwalten*: Ein allgemein gefasster Use Case, der durch ein Sternchen (\*) als zentraler Anwendungsfall gekennzeichnet ist und im zweiten Diagramm weiter verfeinert wird.
 
 - *Bezahlen*: Diese Funktionalität ist mit dem externen FiBuSys verbunden und ermöglicht die Abwicklung von Zahlungsvorgängen über eine definierte Schnittstelle.
 
-Die Daten, auf die sich die Use Cases beziehen, umfassen Kundendaten, Termindaten, Materialdaten, Auftragsdaten, Gerätedaten, Personaldaten, Angebote, Rechnungen, Bestellungen und Lieferungen. Diese bilden das Fundament der Geschäftsprozesse, die durch die Software unterstützt werden.
+In dem Kommentar ist weiter definiert, auf welche Daten sich der "Verwalten"-Use-Case genau bezieht.
 
 == Verfeinerung: Verwalten
 #image("Verwalten _ Verfeinerung.png")
 
 Das zweite Diagramm detailliert den "Verwalten" Use Case aus dem Hauptdiagramm und zeigt die spezifischen Verwaltungsfunktionen, die im System verfügbar sind.
 
-=== Hauptfunktionalitäten
+- *Anlegen*: Eine zentrale Funktion zum Erstellen neuer Datensätze im System.
 
-- *Anlegen*: Eine zentrale Funktion zum Erstellen neuer Datensätze im System, gekennzeichnet durch das Sternchen als wichtiger Anwendungsfall.
+- *Importieren*: Ermöglicht das Einlesen von Daten aus externen Quellen in das System. Eine genaue Definition der Schnittstelle findet sich in der Analyse.
 
-- *Importieren*: Ermöglicht das Einlesen von Daten aus externen Quellen in das System, was besonders für Massendatenverarbeitung wichtig ist.
+- *Exportieren*: Das ist die Funktionalität, um Daten zu exportieren. Verschiedene Benutzergruppen können hier verschieden ausführlich die Daten exportieren (Administratoren können alles exportieren, Gastzugängen können beschränkte Export-Rechte gegeben werden).
 
-- *Exportieren*: Das Gegenstück zum Importieren - hiermit können Daten aus dem System in verschiedene Formate exportiert werden, etwa für Berichte oder Datenübertragungen.
+- *Drucken*: Markiert mit zwei Sternen (\*\*), bezieht sich dieser Anwendungsfall besonders auf Rechnungen und Angebote, wie in der Notiz angegeben.
 
-- *Drucken*: Markiert mit zwei Sternen, bezieht sich dieser Anwendungsfall besonders auf Rechnungen und Angebote, wie in der Notiz angegeben.
-
-- *Anzeigen*: Diese Funktion erlaubt das Betrachten von Datensätzen und ist ein zentraler Punkt in der Benutzerinteraktion. Die Anmerkung im gelben Feld weist darauf hin, dass alle Anzeige-Funktionalitäten in einem separaten "Anzeigen" Use Case Diagramm dargestellt werden.
+- *Anzeigen*: Diese Funktion erlaubt das Betrachten von Datensätzen und ist ein zentraler Punkt in der Benutzerinteraktion.
 
 - *Ändern*: Diese Funktionalität, die im vierten Diagramm weiter verfeinert wird, ermöglicht die Modifikation bestehender Datensätze.
 
-- *Suchen und Filtern*: Ermöglicht das gezielte Auffinden und Filtern von Datensätzen nach verschiedenen Kriterien, was besonders bei großen Datenmengen wichtig ist.
+- *Suchen und Filtern*: Ermöglicht das gezielte Auffinden und Filtern von Datensätzen nach verschiedenen Kriterien, was besonders bei großen Datenmengen wichtig ist. Das ist eine Erweiterung von "Anzeigen", da in der Suche eine weniger detallierte Ansicht der einzelnen Daten angezeigt wird.
 
-Diese Funktionen werden durch verschiedene Akteure ausgeführt. Der Administrator hat Zugriff auf Importieren und Exportieren, während der Vorgesetzte besonders mit Anzeigen und Ändern interagiert. Die Extension-Points und Include-Beziehungen zeigen, wie diese Funktionen miteinander verknüpft sind.
+Diese Funktionen werden durch verschiedene Akteure ausgeführt. Der Administrator hat Zugriff auf Importieren und Exportieren, während der Vorgesetzte mit Anzeigen und Ändern interagiert.
 
-== Daten validieren - Terminverwaltung
+== Verfeinerung: Ändern
+#image("Ändern _ Verfeinerung.png")
+
+Das vierte Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den Prozess der Datenanpassung mit den erforderlichen Validierungsschritten.
+
+- *Daten anpassen*: Der übergeordnete Use Case, der den gesamten Änderungsprozess umfasst und von einem Vorgesetzten initiiert wird.
+
+- *Datenfelder verändern*: Ein durch "Include" eingebundener Teilprozess, der die eigentliche Modifikation der Datenfelder ermöglicht.
+
+- *Daten validieren*: Stellt sicher, dass die geänderten Daten den Validierungsregeln entsprechen.
+
+- *Änderungen bestätigen*: Der letzte Schritt im Prozess, bei dem der Benutzer die Änderungen nach erfolgreicher Validierung bestätigt.
+
+- *Änderungen verwerfen*: Eine Alternative, die es dem Benutzer ermöglicht, den Änderungsprozess abzubrechen und zum ursprünglichen Zustand zurückzukehren.
+
+Die blaue Notiz im Diagramm erklärt den Prozessablauf: Zuerst müssen die Datenfelder angepasst werden, dann werden die Daten vom System validiert, und schließlich muss der Benutzer die Änderungen reviewen und bestätigen.
+
+== Verfeinerung: Daten validieren am Beispiel der Terminverwaltung
 #image("Daten validieren (Terminverwaltung) Vefeinerung.png")
 
-Das dritte Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: die Validierung von Termindaten. Es zeigt die Interaktion zwischen dem System und den Validierungsregeln.
+Das dritte Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: die Validierung von Termindaten. Als Akteur tritt hier nur das System auf, das alle Daten validieren bzw. eine ID generieren muss.
 
-=== Validierungsregeln
+- *Titel ist nicht leer*: Validierungsregel, die sicherstellt, dass jeder Termin einen Titel hat.
 
-- *Titel ist nicht leer*: Eine grundlegende Validierungsregel, die sicherstellt, dass jeder Termin einen aussagekräftigen Titel hat.
-
-- *EndZeitpunkt ist valides DateTime*: Stellt sicher, dass das Enddatum eines Termins ein gültiges Datumsformat hat und zeitlich sinnvoll ist.
+- *EndZeitpunkt ist valides DateTime*: Stellt sicher, dass das Enddatum eines Termins ein gültiges Datumsformat hat und zeitlich sinnvoll ist (nach dem Startzeitpunkt liegt).
 
 - *AuftragsID entspricht der ID eines existierenden Auftrags*: Überprüft die Referenzintegrität, indem sichergestellt wird, dass der Termin mit einem existierenden Auftrag verknüpft ist.
 
@@ -78,25 +91,6 @@ Das dritte Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: d
 - *StartZeitpunkt ist valide DateTime*: Analog zur Endzeit-Prüfung wird hier sichergestellt, dass der Startzeitpunkt ein gültiges Format hat.
 
 Diese Validierungsregeln sind entscheidend für die Datenqualität und Konsistenz im System. Sie stehen in direkter Verbindung zum "Daten validieren" Use Case im vierten Diagramm und sind auch relevant für die "Ändern" und "Anlegen" Funktionen aus dem zweiten Diagramm.
-
-== Verfeinerung: Ändern
-#image("Ändern _ Verfeinerung.png")
-
-Das vierte Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den Prozess der Datenanpassung mit den erforderlichen Validierungsschritten.
-
-=== Prozessschritte
-
-- *Daten anpassen*: Der übergeordnete Use Case, der den gesamten Änderungsprozess umfasst und von einem Vorgesetzten initiiert wird.
-
-- *Datenfelder verändern*: Ein durch "Include" eingebundener Teilprozess, der die eigentliche Modifikation der Datenfelder ermöglicht.
-
-- *Daten validieren*: Stellt sicher, dass die geänderten Daten den Validierungsregeln entsprechen, wie sie im dritten Diagramm für Termindaten beschrieben wurden. Dieser Schritt ist zwingend durch die "Include"-Beziehung eingebunden.
-
-- *Änderungen bestätigen*: Der letzte Schritt im Prozess, bei dem der Benutzer die Änderungen nach erfolgreicher Validierung bestätigt.
-
-- *Änderungen verwerfen*: Eine Alternative, die es dem Benutzer ermöglicht, den Änderungsprozess abzubrechen und zum ursprünglichen Zustand zurückzukehren.
-
-Die blaue Notiz im Diagramm erklärt den Prozessablauf: Zuerst müssen die Datenfelder angepasst werden, dann werden die Daten vom System validiert, und schließlich muss der Benutzer die Änderungen reviewen und bestätigen.
 
 // == Zusammenhänge und Referenzen zwischen den Diagrammen
 
