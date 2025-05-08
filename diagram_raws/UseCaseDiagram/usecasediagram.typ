@@ -1,7 +1,9 @@
 = Use Case Diagramme
 #image("Verwaltungssoftware.png")
 
-Die vorliegenden UML-Anwendungsfalldiagramme zeigen ein umfassendes System zur Verwaltung von Unternehmensressourcen und -prozessen. Diese Diagramme beschreiben die funktionalen Anforderungen aus Sicht der verschiedenen Benutzer und visualisieren die Interaktionen zwischen den Akteuren und dem System. Im Folgenden werden die vier Use Case Diagramme ausführlich erläutert und deren Zusammenhänge dargestellt.
+Das Diagramm zeigt die Use-Cases, die unser Programm abdecken soll. Dabei haben wir uns dafür entschieden, die Rollen in dem Diagramm abzubilden, weshalb es mehrere Akteure des Unternehmens gibt (links). Außerdem ist das FiBuSys als Akteure dargestellt, da es beim Bezahlen angebunden ist. Beim Verwalten von Personaldaten wird diese Schnittstelle ebenfalls genutzt, das ist aber aus Übersichtlichkeits-Gründen nicht eingezeichnet.
+
+Um es für den Benutzer möglichst einfach zu halten, haben wir uns dafür entschieden, einen Daten-getriebenen Ansatz zu wählen: Da die Verwaltung von Kundendaten, Termindaten, Materialdaten, Angeboten, Lieferungen, ... nahezu identisch sind, sind diese nicht als eigene Use-Cases eingearbeitet, sondern in einem "Verwalten"-Use-Case zusammengefasst.
 
 == Verwaltungssoftware - Hauptsystem
 
