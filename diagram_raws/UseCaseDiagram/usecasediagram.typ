@@ -1,11 +1,11 @@
 = Use Case Diagramme
-#image("Verwaltungssoftware.png")
 
 Das Diagramm zeigt die Use-Cases, die unser Programm abdecken soll. Dabei haben wir uns dafür entschieden, die Rollen in dem Diagramm abzubilden, weshalb es mehrere Akteure des Unternehmens gibt (links). Außerdem ist das FiBuSys als Akteure dargestellt, da es beim Bezahlen angebunden ist. Beim Verwalten von Personaldaten wird diese Schnittstelle ebenfalls genutzt, das ist aber aus Übersichtlichkeits-Gründen nicht eingezeichnet.
 
 Um es für den Benutzer möglichst einfach zu halten, haben wir uns dafür entschieden, einen Daten-getriebenen Ansatz zu wählen: Da die Verwaltung von Kundendaten, Termindaten, Materialdaten, Angeboten, Lieferungen, ... nahezu identisch sind, sind diese nicht als eigene Use-Cases eingearbeitet, sondern in einem "Verwalten"-Use-Case zusammengefasst.
 
 == Verwaltungssoftware - Hauptsystem
+#image("Verwaltungssoftware.svg")
 
 Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und deren Beziehung zu den verschiedenen Akteuren dar. Diese übergeordnete Darstellung bietet einen Gesamtüberblick über die Systemfunktionen.
 
@@ -38,7 +38,7 @@ Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und 
 In dem Kommentar ist weiter definiert, auf welche Daten sich der "Verwalten"-Use-Case genau bezieht.
 
 == Verfeinerung: Verwalten
-#image("Verwalten _ Verfeinerung.png")
+#image("Verwalten _ Verfeinerung.svg")
 
 Das zweite Diagramm detailliert den "Verwalten" Use Case aus dem Hauptdiagramm und zeigt die spezifischen Verwaltungsfunktionen, die im System verfügbar sind.
 
@@ -59,7 +59,7 @@ Das zweite Diagramm detailliert den "Verwalten" Use Case aus dem Hauptdiagramm u
 Diese Funktionen werden durch verschiedene Akteure ausgeführt. Der Administrator hat Zugriff auf Importieren und Exportieren, während der Vorgesetzte mit Anzeigen und Ändern interagiert.
 
 == Verfeinerung: Ändern
-#image("Ändern _ Verfeinerung.png")
+#image("Ändern _ Verfeinerung.svg")
 
 Das vierte Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den Prozess der Datenanpassung mit den erforderlichen Validierungsschritten.
 
@@ -76,7 +76,7 @@ Das vierte Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm 
 Die blaue Notiz im Diagramm erklärt den Prozessablauf: Zuerst müssen die Datenfelder angepasst werden, dann werden die Daten vom System validiert, und schließlich muss der Benutzer die Änderungen reviewen und bestätigen.
 
 == Verfeinerung: Daten validieren am Beispiel der Terminverwaltung
-#image("Daten validieren (Terminverwaltung) Vefeinerung.png")
+#image("Daten validieren (Terminverwaltung) Vefeinerung.svg")
 
 Das dritte Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: die Validierung von Termindaten. Als Akteur tritt hier nur das System auf, das alle Daten validieren bzw. eine ID generieren muss.
 
