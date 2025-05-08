@@ -881,6 +881,7 @@ werden können.\
   [Referenzen auf Aufträge],
   [Optional: Liste an verknüpften Kundenaufträgen (beispielsweise bei Beschaffung relevant)],
 )<ref:eigenauftrag>
+#pagebreak()
 *Angebote*
 #table(
   columns: 3,
@@ -893,7 +894,7 @@ werden können.\
 
   //   [AngebotID], [Ganzzahl], [Eindeutige Kennung für das Angebot],
   [Auftrag], [Referenz auf Auftrag], [Verweis auf den Auftrag],
-  [AngebotsPosten], [Zeichenkette], [Einzelner Angebotsgegenstand], // TODO: Referenzen auf eigene Tabelle
+  [AngebotsPosten], [Referenzen auf Posten], [Angebotsgegenstände],
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel],
   [Zeichenkette],
@@ -912,7 +913,7 @@ werden können.\
 
   //   [LieferungID], [Ganzzahl], [Eindeutige Kennung für die Lieferung],
   [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
-  [LieferungsPosten], [Zeichenkette], [Einzelner Lieferungsgegenstand],
+  [LieferungsPosten], [Referenzen auf Posten], [Lieferungsgegenstände],
   [LieferterminGeplant], [Datum], [Geplanter Liefertermin],
   [Liefertermin], [Datum], [Tatsächlicher Liefertermin],
 )<ref:lieferung>
@@ -928,12 +929,44 @@ werden können.\
 
   //   [RechnungID], [Ganzzahl], [Eindeutige Kennung für die Rechnung],
   [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
-  [RechnungsPosten], [Zeichenkette], [Einzelner Rechnungsgegenstand], // TODO: Referenzen auf eigene Tabelle
+  [RechnungsPosten], [Referenzen auf Posten], [Rechnungsgegenstände],
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel],
   [Zeichenkette],
   [Titel der Rechnung (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:rechnung>
+*Posten*
+#table(
+  columns: 3,
+  fill: (x, y) => if y == 0 { internColor },
+  table.header(
+    [#text(fill: white, weight: "bold")[Attribut]],
+    [#text(fill: white, weight: "bold")[Datentyp]],
+    [#text(fill: white, weight: "bold")[Beschreibung]],
+  ),
+
+  [Titel], [Zeichenkette], [Name des Postens],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Anzahl], [Ganzzahl], [Anzahl des Produkts],
+  [Produkt], [Referenz auf Produkt], [Verweis auf das Produkt],
+)<ref:posten>
+#pagebreak()
+*Produkte*
+#table(
+  columns: 3,
+  fill: (x, y) => if y == 0 { internColor },
+  table.header(
+    [#text(fill: white, weight: "bold")[Attribut]],
+    [#text(fill: white, weight: "bold")[Datentyp]],
+    [#text(fill: white, weight: "bold")[Beschreibung]],
+  ),
+
+  [Name], [Zeichenkette], [Name des Produkts],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Hersteller], [Zeichenkette], [Hersteller des Produkts],
+  [Lieferant], [Referenz auf Lieferant], [Verweis auf den Lieferanten],
+  [PreisProStk], [Gleitkommazahl], [Preis pro Stück],
+)<ref:produkt>
 *Termin*
 #table(
   columns: 3,
@@ -951,6 +984,7 @@ werden können.\
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel], [Zeichenkette], [Titel des Termins],
 )<ref:termin>
+
 *Material*
 #table(
   columns: 3,
