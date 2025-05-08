@@ -9,6 +9,7 @@ Um es für den Benutzer möglichst einfach zu halten, haben wir uns dafür entsc
 
 Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und deren Beziehung zu den verschiedenen Akteuren dar. Diese übergeordnete Darstellung bietet einen Gesamtüberblick über die Systemfunktionen.
 
+#pagebreak(weak: true)
 *Akteure und ihre Rollen*
 
 - *Gast*: Ein temporärer Benutzer, dem individuelle, zeitlich begrenzte Berechtigungen zugewiesen werden können. Diese beschränkten Zugriffsrechte ermöglichen es externen Personen, bestimmte Funktionen zu nutzen, ohne vollständigen Systemzugriff zu erhalten.
@@ -61,7 +62,7 @@ Diese Funktionen werden durch verschiedene Akteure ausgeführt. Der Administrato
 == Verfeinerung: Ändern
 #image("Ändern _ Verfeinerung.svg")
 
-Das vierte Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den Prozess der Datenanpassung mit den erforderlichen Validierungsschritten.
+Dieses Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den Prozess der Datenanpassung mit den erforderlichen Validierungsschritten.
 
 - *Daten anpassen*: Der übergeordnete Use Case, der den gesamten Änderungsprozess umfasst und von einem Vorgesetzten initiiert wird.
 
@@ -78,7 +79,7 @@ Die blaue Notiz im Diagramm erklärt den Prozessablauf: Zuerst müssen die Daten
 == Verfeinerung: Daten validieren am Beispiel der Terminverwaltung
 #image("Daten validieren (Terminverwaltung) Vefeinerung.svg")
 
-Das dritte Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: die Validierung von Termindaten. Als Akteur tritt hier nur das System auf, das alle Daten validieren bzw. eine ID generieren muss.
+Dieses Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: die Validierung von Termindaten. Als Akteur tritt hier nur das System auf, das alle Daten validieren bzw. eine ID generieren muss.
 
 - *Titel ist nicht leer*: Validierungsregel, die sicherstellt, dass jeder Termin einen Titel hat.
 
@@ -89,21 +90,3 @@ Das dritte Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: d
 - *TerminID generieren*: Erzeugt eine eindeutige ID für jeden neuen Termin, was für die Datenbankintegrität und Referenzierung wichtig ist.
 
 - *StartZeitpunkt ist valide DateTime*: Analog zur Endzeit-Prüfung wird hier sichergestellt, dass der Startzeitpunkt ein gültiges Format hat.
-
-Diese Validierungsregeln sind entscheidend für die Datenqualität und Konsistenz im System. Sie stehen in direkter Verbindung zum "Daten validieren" Use Case im vierten Diagramm und sind auch relevant für die "Ändern" und "Anlegen" Funktionen aus dem zweiten Diagramm.
-
-// == Zusammenhänge und Referenzen zwischen den Diagrammen
-
-// Die vier Diagramme bilden ein kohärentes Gesamtbild der Verwaltungssoftware, wobei jedes nachfolgende Diagramm bestimmte Aspekte des vorherigen verfeinert:
-
-// 1. Das erste Diagramm zeigt die übergeordnete Systemarchitektur mit allen Hauptakteuren und zentralen Funktionen.
-
-// 2. Das zweite Diagramm verfeinert den "Verwalten" Use Case aus dem ersten Diagramm und zeigt die verschiedenen Verwaltungsfunktionen.
-
-// 3. Das dritte Diagramm detailliert die Datenvalidierung speziell für die Terminverwaltung, was ein wichtiger Aspekt beim Anlegen und Ändern von Daten ist.
-
-// 4. Das vierte Diagramm fokussiert sich auf den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den detaillierten Prozess der Datenanpassung mit den notwendigen Validierungsschritten.
-
-// Diese hierarchische Verfeinerung ist ein typisches Merkmal von UML-Diagrammen und ermöglicht es, komplexe Systeme auf verschiedenen Abstraktionsebenen zu beschreiben. Die "Include"- und "Extend"-Beziehungen zwischen den Use Cases verdeutlichen die funktionalen Abhängigkeiten und zeigen, welche Prozesse zwingend miteinander verbunden sind.
-
-// Die Darstellung der Akteure und ihre Interaktionen mit den verschiedenen Systemfunktionen ermöglicht ein umfassendes Verständnis der Anforderungen und Abläufe innerhalb der Verwaltungssoftware. Diese Visualisierung dient als wertvolle Grundlage für die Kommunikation zwischen Entwicklern und Stakeholdern sowie für die weitere Systemimplementierung.

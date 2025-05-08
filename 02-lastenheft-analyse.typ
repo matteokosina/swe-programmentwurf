@@ -91,19 +91,14 @@ im Büro auf eine gemeinsame Datenbasis zugreift. \
 
 #qa(
   question: "Welche Betriebssysteme sind vorhanden oder sollten unterstützt werden?",
-  answer: "Da unsere Kunden sehr unterschiedliche Infrastrukturen besitzen,
-    wollen wir die Funktionalität der Software für die Desktop-Betriebssysteme
-    Windows 11, Linux Ubuntu 24.04, Linux Debian 12 und MacOS 15 garantieren.",
-  internal_remark: "Plattformunabhängigkeit wird benötigt. Unterschiede in der
-    Verwaltung von Dateipfaden sind zu beachten.",
+  answer: "Da unsere Kunden sehr unterschiedliche Infrastrukturen besitzen, wollen wir die Funktionalität der Software für die Desktop-Betriebssysteme Windows 11, Linux Ubuntu 24.04, Linux Debian 12 und MacOS 15 garantieren.",
+  internal_remark: "Plattformunabhängigkeit wird benötigt. Unterschiede in der Verwaltung von Dateipfaden sind zu beachten.",
 )
 
 #qa(
   question: "Wie soll die Verfügbarkeit der Software gestaltet sein, kann sie bspw. über die Nacht abgeschaltet werden oder muss sie zu jeder Zeit verfügbar sein?",
   answer: "Die Software muss nicht durchgängig laufen. Die genauen Zeiträume soll jedes Unternehmen selbst anpassen können. Als Standardwert kann hier von 22 – 2 Uhr verwendet werden.",
-  internal_remark: "Lösbar über Konfigurations-Seite, welche nur für
-    Administratoren zugänglich ist. Dort kann auch der aktive Zeitrahmen
-    eingegrenzt werden.",
+  internal_remark: "Lösbar über Konfigurations-Seite, welche nur für Administratoren zugänglich ist. Dort kann auch der aktive Zeitrahmen eingegrenzt werden.",
 )
 
 Für Betriebe, welche beim Kunden vor Ort auf ihre Daten zugreifen wollen
@@ -130,9 +125,7 @@ die auf Tablets oder Handys laufen können. \
 #qa(
   question: "Wie soll die Verfügbarkeit der Software gestaltet sein, kann sie bspw. über die Nacht abgeschaltet werden oder muss sie zu jeder Zeit verfügbar sein?",
   answer: "Die Software muss nicht durchgängig laufen. Die genauen Zeiträume soll jedes Unternehmen selbst anpassen können. Als Standardwert kann hier von 22 – 2 Uhr verwendet werden.",
-  internal_remark: "Lösbar über Konfigurations-Seite, welche nur für
-    Administratoren zugänglich ist. Dort kann auch der aktive Zeitrahmen
-    eingegrenzt werden.",
+  internal_remark: "Lösbar über Konfigurations-Seite, welche nur für Administratoren zugänglich ist. Dort kann auch der aktive Zeitrahmen eingegrenzt werden.",
 )
 
 #qa(
@@ -476,9 +469,7 @@ werden können.\
     #qa(
       question: "Existieren branchen-spezifische Benutzeroberflächen? Müssen diese erstellbar sein?",
       answer: "Nein, alle Branchen haben die gleiche Benutzeroberfläche, einzelne Untermenüs können verschieden sein, aber das kann der jeweilige Systemadmin dann entscheiden",
-      internal_remark: "Dies kann mit Feature-Flags gelöst werden -> was angezeigt werden soll
-        und was nicht. Diese können auch über die Konfigurationsseite für Admins bearbeitet
-        werden. So können beispielsweise alle Seiten zu „Werkzeugen“ deaktiviert werden.",
+      internal_remark: "Dies kann mit Feature-Flags gelöst werden -> was angezeigt werden soll und was nicht. Diese können auch über die Konfigurationsseite für Admins bearbeitet werden. So können beispielsweise alle Seiten zu „Werkzeugen“ deaktiviert werden.",
     )
 
     #qa(
@@ -776,28 +767,27 @@ werden können.\
       question: "Welches Format haben die Zeichenkettenlisten?",
       answer: [Sie sind im CSV Format, und ist wie folgt definiert:
         #table(
-          columns: 6,
-          [Produktname],
-          [ProduktID],
-          [Hersteller],
-          [Lieferant],
-          [PreisProStk],
-          [Beschreibung],
+          columns: 6, table.header(
+          [*Produktname*],
+          [*ProduktID*],
+          [*Hersteller*],
+          [*Lieferant*],
+          [*PreisProStk*],
+          [*Beschreibung*]),
 
           [Betonschraube Ultracut FBS II],
           [25243996],
           [FISCHER],
           [Bauhaus],
           [2.6],
-          [Sechskantkopf,
-            10 x 120 mm],
+          [Sechskantkopf,\ 10 x 120mm],
 
           [...], [...], [...], [...], [...], [...],
         )
       ],
       internal_remark: [Daraus folgt dieses CSV-Schema:
         ```CSV
-          Produktname;ProduktID;Hersteller;Lieferant;PreisProStk;Beschreibung
+          Produktname;ProduktID;Hersteller;Lieferant; PreisProStk;Beschreibung
           Betonschraube Ultracut FBS II;25243996;FISCHER;Bauhaus;2.6;Sechskantkopf, 10 x 120 mm,
         ```],
     )
@@ -1462,6 +1452,7 @@ werden können.\
   [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
   [Baujahr], [Integer], [Baujahr des/der Werkzeugs/Anlage],
 )<ref:werkzeug>
+#pagebreak(weak: true)
 *Datei*
 #table(
   columns: 3,
@@ -1584,10 +1575,12 @@ werden können.\
 
 #qa(
   question: "Wer soll das Produkt am Ende warten?",
-  answer: "Wir haben IT-Experten, welche die Wartung des Produktes durchführen werden",
-  internal_remark: "Bezüglich Zuverlässigkeit: Muss die zentrale Datenbasis darauf extra ausgerichtet
-        sein – Stichwort High Availability?
-        Ein normaler Server reicht vollkommen aus und downtime ist möglich (siehe oben)",
+  answer: "Wir haben IT-Experten, welche die Wartung des Produktes durchführen werden"
+  )
+#qa(
+  question: "Bezüglich Zuverlässigkeit: Muss die zentrale Datenbasis darauf extra ausgerichtet sein – Stichwort High Availability? Also ist es ein Problem für Sie, wenn der Server mal nicht erreichbar ist, oder muss er 24/7 immer erreichbar sein?",
+  answer: "Wenn der Server mal 15 Minuten nicht erreichbar ist, ist das schade, aber dafür möchten wir keine Unsummen aufbringen, um das zu verhindern. Konzentrieren Sie sich lieber auf die Benutzbarkeit!",
+  internal_remark: "Ein normaler Server reicht vollkommen aus."
 )
 
 == Aufgaben
