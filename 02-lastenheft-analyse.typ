@@ -1097,6 +1097,7 @@ Chrome, Edge und Safari müssen unterstützt werden")\
     [nicht relevant],
   ),
 
+
   [
     Funktionalität
   ],
