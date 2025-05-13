@@ -9,7 +9,7 @@
   JSON: (name: " JSON", icon: "{}", color: rgb("#2b9dce")),
 ))
 
-#let questionCount = state("q", 0)
+#let questionCount = state("q", 1)
 
 #let questionColor = rgb("#48a23a")
 #let answerColor = rgb("#de3333")
@@ -17,15 +17,24 @@
 
 #let qa(question: "", answer: "", internal_remark: "", subquestions: ()) = {
   let render(question, answer, internal_remark, subquestions, level) = {
-    questionCount.update(q => q + 1)
     set enum(
       numbering: n => {
+        let color = n
+
+        if question == "" {
+          color += 1
+        }
+
+        if answer == "" {
+          color += 1
+        }
+
         strong((
           "",
           text(fill: questionColor, [Frage #context { questionCount.get() }:]),
           text(fill: answerColor, "Antwort:"),
           text(fill: internColor, [_Intern_:]),
-        ).at(n))
+        ).at(color))
       },
       number-align: left,
     )
@@ -42,20 +51,27 @@
       }
     ]
 
-    enum.item(text(fill: questionColor, question))
-    enum.item([
-      #text(fill: answerColor, answer)
-      #if internal_remark == "" {
-        subquestions
-      }
-    ])
+    if question != "" {
+      enum.item(text(fill: questionColor, question))
+    }
 
+    if answer != "" {
+      enum.item([
+        #text(fill: answerColor, answer)
+        #if internal_remark == "" {
+          subquestions
+        }
+      ])
+    }
+    
     if internal_remark != "" {
       enum.item([
         #text(fill: internColor, emph(internal_remark))
         #subquestions
       ])
     }
+
+    questionCount.update(q => q + 1)
   }
 
   render(question, answer, internal_remark, subquestions, 1)
@@ -1167,6 +1183,30 @@ werden können.\
 
 *Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung vorgenommen:*
 
+
+=== Produktdaten
+#table(
+  columns: (auto, 1fr),
+  [
+    /LD10/
+  ],
+  [
+    Die Daten sollen in einer zentralen Datenbasis abgespeichert werden.\
+    #qa(
+    question: "Zentrale Datenbasis pro Handwerksbetrieb oder eine große zentrale Datenbasis für alle?",
+    answer: "Handwerksbetriebe haben alle einen lokalen Server (siehe oben)",
+    )
+    #qa(
+    question:"Sollen die Clients auch offline funktionieren und die Daten dann bei Internet-Verbindung synchronisieren?",
+    answer: "Nein, diese Funktion ist nicht vorgesehen (siehe oben)"
+    )
+  ],
+)
+#qa(
+  internal_remark: "Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung
+       vorgenommen:"
+)
+
 *Mitarbeiter / Personaldaten*
 #table(
   columns: 3,
@@ -1177,14 +1217,14 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [MitarbeiterID], [Integer], [Eindeutige Kennung für den Mitarbeiter],
-  [Vorname], [String], [Vorname des Mitarbeiters],
-  [Nachname], [String], [Nachname des Mitarbeiters],
-  [TelefonNummer], [String], [Telefonnummer des Mitarbeiters],
-  [Email], [String], [E-Mail-Adresse des Mitarbeiters],
-  [Rolle], [String], [Rolle des Mitarbeiters (z.B., Kaufmännisch, Admin)],
-  [ZugriffsrechtID], [Integer], [Verweis auf Zugriffsrechtetabelle],
-  [FileID], [Integer], [Verweis auf Bild vom Mitarbeiter],
+  [MitarbeiterID], [Ganzzahl], [Eindeutige Kennung für den Mitarbeiter],
+  [Vorname], [Zeichenkette], [Vorname des Mitarbeiters],
+  [Nachname], [Zeichenkette], [Nachname des Mitarbeiters],
+  [TelefonNummer], [Zeichenkette], [Telefonnummer des Mitarbeiters],
+  [Email], [Zeichenkette], [E-Mail-Adresse des Mitarbeiters],
+  [Rolle], [Referenz auf Rolle], [Rolle des Mitarbeiters (z.B., Kaufmännisch, Admin)],
+  //   [Zugriffsrechte], [Referenzen auf Zugriffsrechte], [Verweise auf Zugriffsrechtetabelle],
+  [Bild], [Referenz auf Datei], [Verweis auf Bild vom Mitarbeiter],
 )<ref:mitarbeiter>
 #pagebreak()
 *GUI-Konfiguration*
@@ -1197,17 +1237,11 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [MitarbeiterID],
-  [Integer],
-  [Verweis auf eindeutige Kennung eines Mitarbeiters],
-
-  [Schriftart],
-  [String],
-  [Gibt den Namen der Schriftart an, in welcher die Texte in der GUI erscheinen],
-
-  [Schriftgröße], [Float], [Gibt die Schriftgröße des angezeigten Textes an],
+  [Mitarbeiter], [Referenz auf Mitarbeiter], [Verweis auf Mitarbeiter, dem die GUI-Konfiguration gehört],
+  [Schriftart], [Zeichenkette], [Gibt den Namen der Schriftart an, in welcher die Texte in der GUI erscheinen],
+  [Schriftgröße], [Gleitkommazahl], [Gibt die Schriftgröße des angezeigten Textes an],
   [Akzentfarbe],
-  [RGB(Integer, Integer, Integer)],
+  [RGB(Ganzzahl, Ganzzahl, Ganzzahl)],
   [Beschreibt die Farbe für vorgehobene Inhalte (z.B. Farbe eines Primärbuttons)],
 
   [DunklerModus],
@@ -1215,9 +1249,22 @@ werden können.\
   [Wenn auf TRUE gesetzt wird alles im dunklen Modus angezeigt (z.B. der Hintergrund), sonst der helle Modus],
 
   [StandardDrucker],
-  [String],
+  [Zeichenkette],
   [Verweis auf den vom Benutzer als „Standard“ ausgewählten Drucker (IP-Adresse des Druckers)],
 )<ref:gui>
+*Rolle*
+#table(
+  columns: 3,
+  fill: (x, y) => if y == 0 { internColor },
+  table.header(
+    [#text(fill: white, weight: "bold")[Attribut]],
+    [#text(fill: white, weight: "bold")[Datentyp]],
+    [#text(fill: white, weight: "bold")[Beschreibung]],
+  ),
+
+  [Titel], [Zeichenkette], [Bezeichnung der Rolle],
+  [Zugriffsrechte], [Referenzen auf Zugriffsrechte], [Verweise auf die Zugriffsrechte der Rolle],
+)<ref:rolle>
 *Zugriffsrechte*
 #table(
   columns: 3,
@@ -1228,9 +1275,10 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [ZugriffsrechtID], [Integer], [Eindeutige Kennung für das Zugriffsrecht],
-  [RechtArt], [String], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
+  [Bezugsobjekt], [Zeichenkette], [Ziel des Zugriffsrechts (z.B. Termine, Aufträge, Personaldaten)],
+  [RechtArt], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
 )<ref:zugriffsrecht>
+#pagebreak()
 *Lieferanten*
 #table(
   columns: 3,
@@ -1241,14 +1289,14 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [LieferantenID], [Integer], [Eindeutige Kennung für den Lieferanten],
-  [FirmenName], [String], [Name des Lieferanten],
-  [Straße], [String], [Straßenname],
-  [Hausnummer], [String], [Hausnummer],
-  [PLZ], [String], [Postleitzahl],
-  [Stadt], [String], [Stadt],
-  [TelefonNummer], [String], [Telefonnummer],
-  [Email], [String], [E-Mail-Adresse],
+  //   [LieferantenID], [Ganzzahl], [Eindeutige Kennung für den Lieferanten],
+  [FirmenName], [Zeichenkette], [Name des Lieferanten],
+  [Straße], [Zeichenkette], [Straßenname],
+  [Hausnummer], [Zeichenkette], [Hausnummer],
+  [PLZ], [Zeichenkette], [Postleitzahl],
+  [Stadt], [Zeichenkette], [Stadt],
+  [TelefonNummer], [Zeichenkette], [Telefonnummer],
+  [Email], [Zeichenkette], [E-Mail-Adresse],
 )<ref:lieferant>
 *Kunden*
 #table(
@@ -1260,27 +1308,19 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [KundenID], [Integer], [Eindeutige Kennung für den Kunden],
-  [Firma],
-  [String],
-  [Firma (falls es ein Firmenkunde ist, ansonsten leerer String)],
-
-  [SteuerID],
-  [String],
-  [SteuerID (falls es ein Firmenkunde ist, ansonsten leerer String)],
-
-  [Vorname], [String], [Vorname des Kunden / der Ansprechperson bei der Firma],
-  [Nachname],
-  [String],
-  [Nachname des Kunden / der Ansprechperson bei der Firma],
-
-  [Strasse], [String], [Straßenname],
-  [Hausnummer], [String], [Hausnummer],
-  [PLZ], [String], [Postleitzahl],
-  [Stadt], [String], [Stadt],
-  [TelefonNummer], [String], [Telefonnummer],
-  [Email], [String], [E-Mail-Adresse],
+  //   [KundenID], [Ganzzahl], [Eindeutige Kennung für den Kunden],
+  [FirmenName], [Zeichenkette], [Firmen Name (falls es ein Firmenkunde ist, ansonsten leerer Zeichenkette)],
+  [SteuerID], [Zeichenkette], [SteuerID (falls es ein Firmenkunde ist, ansonsten leerer Zeichenkette)],
+  [Vorname], [Zeichenkette], [Vorname des Kunden / der Ansprechperson bei der Firma],
+  [Nachname], [Zeichenkette], [Nachname des Kunden / der Ansprechperson bei der Firma],
+  [Strasse], [Zeichenkette], [Straßenname],
+  [Hausnummer], [Zeichenkette], [Hausnummer],
+  [PLZ], [Zeichenkette], [Postleitzahl],
+  [Stadt], [Zeichenkette], [Stadt],
+  [TelefonNummer], [Zeichenkette], [Telefonnummer],
+  [Email], [Zeichenkette], [E-Mail-Adresse],
 )<ref:kunde>
+#pagebreak()
 *Kundenaufträge*
 #table(
   columns: 3,
@@ -1291,17 +1331,17 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [AuftragID], [Integer], [Eindeutige Kennung für den Kundenauftrag],
-  [KundenID], [Integer], [Verweis auf Kunden],
-  [StartTermin], [Date], [Starttermin des Auftrags],
-  [EndTermin], [Date], [Endtermin des Auftrags],
-  [BearbeiterID], [Integer], [Verweis auf Mitarbeiter],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
+  //   [AuftragID], [Ganzzahl], [Eindeutige Kennung für den Kundenauftrag],
+  [Kunde], [Referenz auf Kunde], [Verweis auf den Kunden],
+  [StartTermin], [Datum], [Starttermin des Auftrags],
+  [EndTermin], [Datum], [Endtermin des Auftrags],
+  [Bearbeiter], [Referenz auf Mitarbeiter], [Verweis auf Mitarbeiter, der den Auftrag bearbeitet],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel],
-  [String],
+  [Zeichenkette],
   [Titel des Auftrags (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:kundenauftrag>
-#pagebreak()
+
 *Eigenauftrag*
 #table(
   columns: 3,
@@ -1312,24 +1352,21 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [AuftragID], [Integer], [Eindeutige Kennung für den Eigenauftrag],
-  [FirmenID], [Integer], [Verweis auf andere Firma],
-  [StartTermin], [Date], [Starttermin des Auftrags],
-  [EndTermin], [Date], [Endtermin des Auftrags],
-  [BearbeiterID], [Integer], [Verweis auf Mitarbeiter],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
+  //   [AuftragID], [Ganzzahl], [Eindeutige Kennung für den Eigenauftrag],
+  [Lieferant], [Referenz auf Lieferant], [Verweis auf Lieferanten, der den Auftrag bearbeitet],
+  [StartTermin], [Datum], [Starttermin des Auftrags],
+  [EndTermin], [Datum], [Endtermin des Auftrags],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel],
-  [String],
+  [Zeichenkette],
   [Titel des Auftrags (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 
-  [Verwendungszweck],
-  [String],
-  [Für was wurde dieser Auftrag erstellt (z.B. Reparatur)],
-
+  [Verwendungszweck], [Zeichenkette], [Für was wurde dieser Auftrag erstellt (z.B. Reparatur)],
   [VerknüpfteAufträge],
-  [Liste an Integern],
+  [Referenzen auf Aufträge],
   [Optional: Liste an verknüpften Kundenaufträgen (beispielsweise bei Beschaffung relevant)],
 )<ref:eigenauftrag>
+#pagebreak()
 *Angebote*
 #table(
   columns: 3,
@@ -1340,15 +1377,15 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [AngebotID], [Integer], [Eindeutige Kennung für das Angebot],
-  [AuftragID], [Integer], [Verweis auf Auftrag],
-  [AngebotsPosten], [String], [Einzelner Angebotsgegenstand],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
+  //   [AngebotID], [Ganzzahl], [Eindeutige Kennung für das Angebot],
+  [Auftrag], [Referenz auf Auftrag], [Verweis auf den Auftrag],
+  [AngebotsPosten], [Referenzen auf Posten], [Angebotsgegenstände],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel],
-  [String],
+  [Zeichenkette],
   [Titel des Angebots (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:angebot>
-#pagebreak()
+
 *Lieferungen*
 #table(
   columns: 3,
@@ -1359,9 +1396,9 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [LieferungID], [Integer], [Eindeutige Kennung für die Lieferung],
-  [AuftragID], [Integer], [Verweis auf Auftrag],
-  [LieferungsPosten], [String], [Einzelner Lieferungsgegenstand],
+  //   [LieferungID], [Ganzzahl], [Eindeutige Kennung für die Lieferung],
+  [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
+  [LieferungsPosten], [Referenzen auf Posten], [Lieferungsgegenstände],
   [LieferterminGeplant], [Datum], [Geplanter Liefertermin],
   [Liefertermin], [Datum], [Tatsächlicher Liefertermin],
 )<ref:lieferung>
@@ -1375,14 +1412,46 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [RechnungID], [Integer], [Eindeutige Kennung für die Rechnung],
-  [AuftragID], [Integer], [Verweis auf Auftrag],
-  [RechnungsPosten], [String], [Einzelner Rechnungsgegenstand],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
+  //   [RechnungID], [Ganzzahl], [Eindeutige Kennung für die Rechnung],
+  [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
+  [RechnungsPosten], [Referenzen auf Posten], [Rechnungsgegenstände],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel],
-  [String],
+  [Zeichenkette],
   [Titel der Rechnung (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:rechnung>
+*Posten*
+#table(
+  columns: 3,
+  fill: (x, y) => if y == 0 { internColor },
+  table.header(
+    [#text(fill: white, weight: "bold")[Attribut]],
+    [#text(fill: white, weight: "bold")[Datentyp]],
+    [#text(fill: white, weight: "bold")[Beschreibung]],
+  ),
+
+  [Titel], [Zeichenkette], [Name des Postens],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Anzahl], [Ganzzahl], [Anzahl des Produkts],
+  [Produkt], [Referenz auf Produkt], [Verweis auf das Produkt],
+)<ref:posten>
+#pagebreak()
+*Produkte*
+#table(
+  columns: 3,
+  fill: (x, y) => if y == 0 { internColor },
+  table.header(
+    [#text(fill: white, weight: "bold")[Attribut]],
+    [#text(fill: white, weight: "bold")[Datentyp]],
+    [#text(fill: white, weight: "bold")[Beschreibung]],
+  ),
+
+  [Name], [Zeichenkette], [Name des Produkts],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Hersteller], [Zeichenkette], [Hersteller des Produkts],
+  [Lieferant], [Referenz auf Lieferant], [Verweis auf den Lieferanten],
+  [PreisProStk], [Gleitkommazahl], [Preis pro Stück],
+)<ref:produkt>
 *Termin*
 #table(
   columns: 3,
@@ -1393,14 +1462,14 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [TerminID], [Integer], [Eindeutige Kennung für den Termin],
-  [AuftragID], [Integer], [Verweis auf Auftrag],
+  //   [TerminID], [Ganzzahl], [Eindeutige Kennung für den Termin],
+  [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
   [StartZeitpunkt], [DateTime], [Startzeitpunkt des Termins],
   [EndZeitpunkt], [DateTime], [Endzeitpunkt des Termins],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
-  [Titel], [String], [Titel des Termins],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Titel], [Zeichenkette], [Titel des Termins],
 )<ref:termin>
-#pagebreak()
+
 *Material*
 #table(
   columns: 3,
@@ -1411,21 +1480,21 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [MaterialID], [Integer], [Eindeutige Kennung für das Material],
-  [Name], [String], [Name des Materials],
-  [LieferantenID], [Integer], [Verweis auf Lieferanten],
-  [Bestand], [Integer], [Verfügbare Menge des Materials],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
-  [Titel], [String], [Titel des Materials (z.B. für spätere Anzeige)],
+  //   [MaterialID], [Ganzzahl], [Eindeutige Kennung für das Material],
+  [Name], [Zeichenkette], [Name des Materials],
+  [Lieferant], [Referenz auf Lieferant], [Verweis auf Lieferanten],
+  [Bestand], [Ganzzahl], [Verfügbare Menge des Materials],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Titel], [Zeichenkette], [Titel des Materials (z.B. für spätere Anzeige)],
 )<ref:material>
+#pagebreak()
 *Werkzeug (und Anlagen)*
 
 #qa(
-  question: "Kann ein Werkzeug in mehreren Aufträgen verwendet werden?",
-  answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden.",
-  internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein",
+question: "Kann ein Werkzeug in mehreren Aufträgen verwendet werden?",
+answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden. ",
+internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
 )
-
 #table(
   columns: 3,
   fill: (x, y) => if y == 0 { internColor },
@@ -1435,24 +1504,17 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [WerkzeugID], [Integer], [Eindeutige Kennung für das/die Werkzeug/Anlage],
-  [Seriennummer],
-  [String],
-  [Beschreibt aus welche Serie / Charge die Maschine kommt],
-
-  [Name], [String], [Name des Werkzeugs],
-  [Hersteller], [String], [Hersteller des Werkzeugs],
-  [Zustand], [String], [Aktueller Zustand (z.B., neu, gewartet, defekt)],
-  [Wartungsanforderungen],
-  [String],
-  [Beschreibt wie und wann die Maschine gewartet werden muss],
-
-  [FileID], [Integer], [Verweis auf Bild, das das/die Werkzeug/Anlage zeigt],
-  [GenutztIn], [Liste an Integer], [Verweis auf AuftragID(s)],
-  [Beschreibung], [String], [Beschreibung oder zusätzliche Notiz],
-  [Baujahr], [Integer], [Baujahr des/der Werkzeugs/Anlage],
+  //   [WerkzeugID], [Ganzzahl], [Eindeutige Kennung für das/die Werkzeug/Anlage],
+  [Seriennummer], [Zeichenkette], [Beschreibt aus welche Serie / Charge die Maschine kommt],
+  [Name], [Zeichenkette], [Name des Werkzeugs],
+  [Hersteller], [Zeichenkette], [Hersteller des Werkzeugs],
+  [Zustand], [Zeichenkette], [Aktueller Zustand (z.B., neu, gewartet, defekt)],
+  [Wartungsanforderungen], [Zeichenkette], [Beschreibt wie und wann die Maschine gewartet werden muss],
+  [FileID], [Ganzzahl], [Verweis auf Bild, das das/die Werkzeug/Anlage zeigt],
+  [GenutztIn], [Referenzen auf Aufträge], [Verweis auf Aufräge, in dene das Werkzeug verwendet wird],
+  [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
+  [Baujahr], [Ganzzahl], [Baujahr des/der Werkzeugs/Anlage],
 )<ref:werkzeug>
-#pagebreak(weak: true)
 *Datei*
 #table(
   columns: 3,
@@ -1463,12 +1525,12 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [FileID], [Integer], [Eindeutige Kennung für die Datei],
-  [Titel], [String], [Titel der Datei],
-  [Dateipfad], [String], [Dateipfad],
-  [Bildunterschrift], [String], [Optionale Beschreibung],
+  //   [FileID], [Ganzzahl], [Eindeutige Kennung für die Datei],
+  [Titel], [Zeichenkette], [Titel der Datei],
+  [Dateipfad], [Zeichenkette], [Dateipfad],
+  [Bildunterschrift], [Zeichenkette], [Optionale Beschreibung],
   [AltText],
-  [String],
+  [Zeichenkette],
   [Text der angezeigt werden kann, wenn die Datei nicht geladen wird (z.B. schlechte Internet-Verbindung). Besonders relevant bei Bildern],
 )<ref:datei>
 === Produktleistungen
