@@ -1226,7 +1226,7 @@ werden können.\
   //   [Zugriffsrechte], [Referenzen auf Zugriffsrechte], [Verweise auf Zugriffsrechtetabelle],
   [Bild], [Referenz auf Datei], [Verweis auf Bild vom Mitarbeiter],
 )<ref:mitarbeiter>
-#pagebreak()
+#pagebreak(weak: true)
 *GUI-Konfiguration*
 #table(
   columns: 3,
@@ -1278,7 +1278,7 @@ werden können.\
   [Bezugsobjekt], [Zeichenkette], [Ziel des Zugriffsrechts (z.B. Termine, Aufträge, Personaldaten)],
   [RechtArt], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
 )<ref:zugriffsrecht>
-#pagebreak()
+#pagebreak(weak: true)
 *Lieferanten*
 #table(
   columns: 3,
@@ -1320,7 +1320,7 @@ werden können.\
   [TelefonNummer], [Zeichenkette], [Telefonnummer],
   [Email], [Zeichenkette], [E-Mail-Adresse],
 )<ref:kunde>
-#pagebreak()
+#pagebreak(weak: true)
 *Kundenaufträge*
 #table(
   columns: 3,
@@ -1366,7 +1366,7 @@ werden können.\
   [Referenzen auf Aufträge],
   [Optional: Liste an verknüpften Kundenaufträgen (beispielsweise bei Beschaffung relevant)],
 )<ref:eigenauftrag>
-#pagebreak()
+#pagebreak(weak: true)
 *Angebote*
 #table(
   columns: 3,
@@ -1435,7 +1435,7 @@ werden können.\
   [Anzahl], [Ganzzahl], [Anzahl des Produkts],
   [Produkt], [Referenz auf Produkt], [Verweis auf das Produkt],
 )<ref:posten>
-#pagebreak()
+#pagebreak(weak: true)
 *Produkte*
 #table(
   columns: 3,
@@ -1487,7 +1487,7 @@ werden können.\
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Titel], [Zeichenkette], [Titel des Materials (z.B. für spätere Anzeige)],
 )<ref:material>
-#pagebreak()
+#pagebreak(weak: true)
 *Werkzeug (und Anlagen)*
 
 #qa(
