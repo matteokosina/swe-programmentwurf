@@ -1643,4 +1643,5 @@ entfällt
     erforderlich (in der Realität natürlich schon!).",
 )
 
-#include "diagram_raws/UseCaseDiagram/usecasediagram.typ"
+#include "diagrams/UseCaseDiagram/usecasediagram.typ"
+#include "diagrams/Analyseklassendiagramm/analyseklassendiagramm.typ"
