@@ -1349,22 +1349,23 @@ werden können.\
   [Titel des Angebots (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:angebot>
 
-*Lieferungen*
-#table(
-  columns: 3,
-  fill: (x, y) => if y == 0 { internColor },
-  table.header(
-    [#text(fill: white, weight: "bold")[Attribut]],
-    [#text(fill: white, weight: "bold")[Datentyp]],
-    [#text(fill: white, weight: "bold")[Beschreibung]],
-  ),
-
-  //   [LieferungID], [Ganzzahl], [Eindeutige Kennung für die Lieferung],
-  [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
-  [LieferungsPosten], [Referenzen auf Posten], [Lieferungsgegenstände],
-  [LieferterminGeplant], [Datum], [Geplanter Liefertermin],
-  [Liefertermin], [Datum], [Tatsächlicher Liefertermin],
-)<ref:lieferung>
+// Wird im Klassendiagramm mit Posten verschmelzt
+// *Lieferungen*
+// #table(
+//   columns: 3,
+//   fill: (x, y) => if y == 0 { internColor },
+//   table.header(
+//     [#text(fill: white, weight: "bold")[Attribut]],
+//     [#text(fill: white, weight: "bold")[Datentyp]],
+//     [#text(fill: white, weight: "bold")[Beschreibung]],
+//   ),
+// 
+//   //   [LieferungID], [Ganzzahl], [Eindeutige Kennung für die Lieferung],
+//   [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
+//   [LieferungsPosten], [Referenzen auf Posten], [Lieferungsgegenstände],
+//   [LieferterminGeplant], [Datum], [Geplanter Liefertermin],
+//   [Liefertermin], [Datum], [Tatsächlicher Liefertermin],
+// )<ref:lieferung>
 *Rechnungen*
 #table(
   columns: 3,
@@ -1397,6 +1398,8 @@ werden können.\
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Anzahl], [Ganzzahl], [Anzahl des Produkts],
   [Produkt], [Referenz auf Produkt], [Verweis auf das Produkt],
+  [GeplanterLiefertermin], [DateTime], [Angedachtes Lieferdatum des Produkts],
+  [TatsächlicherLiefertermin], [DateTime], [Finales Lieferdatum des Produkts],
 )<ref:posten>
 #pagebreak(weak: true)
 *Produkte*
@@ -1414,6 +1417,7 @@ werden können.\
   [Hersteller], [Zeichenkette], [Hersteller des Produkts],
   [Lieferant], [Referenz auf Lieferant], [Verweis auf den Lieferanten],
   [Stückpreis], [Gleitkommazahl], [Preis pro Stück],
+  [Bestand], [Ganzzahl], [Verfügbare Menge des Produkts],
 )<ref:produkt>
 *Termin*
 #table(
