@@ -9,7 +9,7 @@
   JSON: (name: " JSON", icon: "{}", color: rgb("#2b9dce")),
 ))
 
-#let questionCount = state("q", 0)
+#let questionCount = state("q", 1)
 
 #let questionColor = rgb("#48a23a")
 #let answerColor = rgb("#de3333")
@@ -17,15 +17,24 @@
 
 #let qa(question: "", answer: "", internal_remark: "", subquestions: ()) = {
   let render(question, answer, internal_remark, subquestions, level) = {
-    questionCount.update(q => q + 1)
     set enum(
       numbering: n => {
+        let color = n
+
+        if question == "" {
+          color += 1
+        }
+
+        if answer == "" {
+          color += 1
+        }
+
         strong((
           "",
           text(fill: questionColor, [Frage #context { questionCount.get() }:]),
           text(fill: answerColor, "Antwort:"),
           text(fill: internColor, [_Intern_:]),
-        ).at(n))
+        ).at(color))
       },
       number-align: left,
     )
@@ -42,20 +51,27 @@
       }
     ]
 
-    enum.item(text(fill: questionColor, question))
-    enum.item([
-      #text(fill: answerColor, answer)
-      #if internal_remark == "" {
-        subquestions
-      }
-    ])
+    if question != "" {
+      enum.item(text(fill: questionColor, question))
+    }
 
+    if answer != "" {
+      enum.item([
+        #text(fill: answerColor, answer)
+        #if internal_remark == "" {
+          subquestions
+        }
+      ])
+    }
+    
     if internal_remark != "" {
       enum.item([
         #text(fill: internColor, emph(internal_remark))
         #subquestions
       ])
     }
+
+    questionCount.update(q => q + 1)
   }
 
   render(question, answer, internal_remark, subquestions, 1)
@@ -1167,6 +1183,30 @@ werden können.\
 
 *Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung vorgenommen:*
 
+
+=== Produktdaten
+#table(
+  columns: (auto, 1fr),
+  [
+    /LD10/
+  ],
+  [
+    Die Daten sollen in einer zentralen Datenbasis abgespeichert werden.\
+    #qa(
+    question: "Zentrale Datenbasis pro Handwerksbetrieb oder eine große zentrale Datenbasis für alle?",
+    answer: "Handwerksbetriebe haben alle einen lokalen Server (siehe oben)",
+    )
+    #qa(
+    question:"Sollen die Clients auch offline funktionieren und die Daten dann bei Internet-Verbindung synchronisieren?",
+    answer: "Nein, diese Funktion ist nicht vorgesehen (siehe oben)"
+    )
+  ],
+)
+#qa(
+  internal_remark: "Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung
+       vorgenommen:"
+)
+
 *Mitarbeiter / Personaldaten*
 #table(
   columns: 3,
@@ -1239,6 +1279,7 @@ werden können.\
 
   [Bezugsobjekt], [Zeichenkette], [Ziel des Zugriffsrechts (z.B. Termine, Aufträge, Personaldaten)],
   [Art], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
+
 )<ref:zugriffsrecht>
 #pagebreak(weak: true)
 *Lieferanten*
@@ -1272,8 +1313,8 @@ werden können.\
   ),
 
   [Kundennummer], [Ganzzahl], [Eindeutige Kennung für den Kunden],
-  [FirmenName], [Zeichenkette], [Firmen Name (falls es ein Firmenkunde ist, ansonsten leerer Zeichenkette)],
-  [Steuernummer], [Zeichenkette], [Steuernummer (falls es ein Firmenkunde ist, ansonsten leerer Zeichenkette)],
+  [FirmenName], [Zeichenkette], [Firmen Name (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
+  [Steuernummer], [Zeichenkette], [Steuernummer (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
   [Vorname], [Zeichenkette], [Vorname des Kunden / der Ansprechperson bei der Firma],
   [Nachname], [Zeichenkette], [Nachname des Kunden / der Ansprechperson bei der Firma],
   [Strasse], [Zeichenkette], [Straßenname],
@@ -1348,24 +1389,22 @@ werden können.\
   [Zeichenkette],
   [Titel des Angebots (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:angebot>
+*Lieferungen*
+#table(
+  columns: 3,
+  fill: (x, y) => if y == 0 { internColor },
+  table.header(
+    [#text(fill: white, weight: "bold")[Attribut]],
+    [#text(fill: white, weight: "bold")[Datentyp]],
+    [#text(fill: white, weight: "bold")[Beschreibung]],
+  ),
 
-// Wird im Klassendiagramm mit Posten verschmelzt
-// *Lieferungen*
-// #table(
-//   columns: 3,
-//   fill: (x, y) => if y == 0 { internColor },
-//   table.header(
-//     [#text(fill: white, weight: "bold")[Attribut]],
-//     [#text(fill: white, weight: "bold")[Datentyp]],
-//     [#text(fill: white, weight: "bold")[Beschreibung]],
-//   ),
-// 
-//   //   [LieferungID], [Ganzzahl], [Eindeutige Kennung für die Lieferung],
-//   [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
-//   [LieferungsPosten], [Referenzen auf Posten], [Lieferungsgegenstände],
-//   [LieferterminGeplant], [Datum], [Geplanter Liefertermin],
-//   [Liefertermin], [Datum], [Tatsächlicher Liefertermin],
-// )<ref:lieferung>
+  //   [LieferungID], [Ganzzahl], [Eindeutige Kennung für die Lieferung],
+  [Auftrag], [Referenz auf Auftrag], [Verweis auf zugehörigen Auftrag],
+  [LieferungsPosten], [Referenzen auf Posten], [Lieferungsgegenstände],
+  [LieferterminGeplant], [Datum], [Geplanter Liefertermin],
+  [Liefertermin], [Datum], [Tatsächlicher Liefertermin],
+)<ref:lieferung>
 *Rechnungen*
 #table(
   columns: 3,
@@ -1459,7 +1498,7 @@ werden können.\
 
 #qa(
 question: "Kann ein Werkzeug in mehreren Aufträgen verwendet werden?",
-answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden. ",
+answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden.",
 internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
 )
 #table(
