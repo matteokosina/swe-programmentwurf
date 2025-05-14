@@ -238,7 +238,7 @@
   }
 
   show heading.where(level: 1): it => {
-    set par(leading: 0pt, justify: false)
+    set par(leading: 0.5em, justify: false)
     pagebreak()
     //   context{
     //     if in-body.get() {

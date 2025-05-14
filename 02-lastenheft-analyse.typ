@@ -1217,10 +1217,12 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [MitarbeiterID], [Ganzzahl], [Eindeutige Kennung für den Mitarbeiter],
+  [Mitarbeiternummer], [Ganzzahl], [Eindeutige Kennung für den Mitarbeiter],
+  [Anrede], [Zeichenkette], [Bevorzugte Anrede des Mitarbeiters],
   [Vorname], [Zeichenkette], [Vorname des Mitarbeiters],
   [Nachname], [Zeichenkette], [Nachname des Mitarbeiters],
-  [TelefonNummer], [Zeichenkette], [Telefonnummer des Mitarbeiters],
+  [Telefonnummer], [Zeichenkette], [Telefonnummer des Mitarbeiters],
+  [PasswortHash], [Zeichenkette], [Gehashtes Passwort für den Login des Mitarbeiters],
   [Email], [Zeichenkette], [E-Mail-Adresse des Mitarbeiters],
   [Rolle], [Referenz auf Rolle], [Rolle des Mitarbeiters (z.B., Kaufmännisch, Admin)],
   //   [Zugriffsrechte], [Referenzen auf Zugriffsrechte], [Verweise auf Zugriffsrechtetabelle],
@@ -1276,7 +1278,8 @@ werden können.\
   ),
 
   [Bezugsobjekt], [Zeichenkette], [Ziel des Zugriffsrechts (z.B. Termine, Aufträge, Personaldaten)],
-  [RechtArt], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
+  [Art], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
+
 )<ref:zugriffsrecht>
 #pagebreak(weak: true)
 *Lieferanten*
@@ -1290,10 +1293,11 @@ werden können.\
   ),
 
   //   [LieferantenID], [Ganzzahl], [Eindeutige Kennung für den Lieferanten],
-  [FirmenName], [Zeichenkette], [Name des Lieferanten],
+  [Name], [Zeichenkette], [Name des Lieferanten],
+  [Steuernummer], [Zeichenkette], [Steuernummer des Lieferanten],
   [Straße], [Zeichenkette], [Straßenname],
   [Hausnummer], [Zeichenkette], [Hausnummer],
-  [PLZ], [Zeichenkette], [Postleitzahl],
+  [Postleitzahl], [Zeichenkette], [Postleitzahl],
   [Stadt], [Zeichenkette], [Stadt],
   [TelefonNummer], [Zeichenkette], [Telefonnummer],
   [Email], [Zeichenkette], [E-Mail-Adresse],
@@ -1308,14 +1312,14 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  //   [KundenID], [Ganzzahl], [Eindeutige Kennung für den Kunden],
-  [FirmenName], [Zeichenkette], [Firmen Name (falls es ein Firmenkunde ist, ansonsten leerer Zeichenkette)],
-  [SteuerID], [Zeichenkette], [SteuerID (falls es ein Firmenkunde ist, ansonsten leerer Zeichenkette)],
+  [Kundennummer], [Ganzzahl], [Eindeutige Kennung für den Kunden],
+  [FirmenName], [Zeichenkette], [Firmen Name (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
+  [Steuernummer], [Zeichenkette], [Steuernummer (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
   [Vorname], [Zeichenkette], [Vorname des Kunden / der Ansprechperson bei der Firma],
   [Nachname], [Zeichenkette], [Nachname des Kunden / der Ansprechperson bei der Firma],
   [Strasse], [Zeichenkette], [Straßenname],
   [Hausnummer], [Zeichenkette], [Hausnummer],
-  [PLZ], [Zeichenkette], [Postleitzahl],
+  [Postleitzahl], [Zeichenkette], [Postleitzahl],
   [Stadt], [Zeichenkette], [Stadt],
   [TelefonNummer], [Zeichenkette], [Telefonnummer],
   [Email], [Zeichenkette], [E-Mail-Adresse],
@@ -1385,7 +1389,6 @@ werden können.\
   [Zeichenkette],
   [Titel des Angebots (z.B. für spätere Druck-Anwendungen). Hieraus wird dann auch der Dateiname zum Abspeichern gebildet],
 )<ref:angebot>
-
 *Lieferungen*
 #table(
   columns: 3,
@@ -1434,6 +1437,8 @@ werden können.\
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Anzahl], [Ganzzahl], [Anzahl des Produkts],
   [Produkt], [Referenz auf Produkt], [Verweis auf das Produkt],
+  [GeplanterLiefertermin], [DateTime], [Angedachtes Lieferdatum des Produkts],
+  [TatsächlicherLiefertermin], [DateTime], [Finales Lieferdatum des Produkts],
 )<ref:posten>
 #pagebreak(weak: true)
 *Produkte*
@@ -1450,7 +1455,8 @@ werden können.\
   [Beschreibung], [Zeichenkette], [Beschreibung oder zusätzliche Notiz],
   [Hersteller], [Zeichenkette], [Hersteller des Produkts],
   [Lieferant], [Referenz auf Lieferant], [Verweis auf den Lieferanten],
-  [PreisProStk], [Gleitkommazahl], [Preis pro Stück],
+  [Stückpreis], [Gleitkommazahl], [Preis pro Stück],
+  [Bestand], [Ganzzahl], [Verfügbare Menge des Produkts],
 )<ref:produkt>
 *Termin*
 #table(
@@ -1492,7 +1498,7 @@ werden können.\
 
 #qa(
 question: "Kann ein Werkzeug in mehreren Aufträgen verwendet werden?",
-answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden. ",
+answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden.",
 internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
 )
 #table(
@@ -1529,7 +1535,7 @@ internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
   [Titel], [Zeichenkette], [Titel der Datei],
   [Dateipfad], [Zeichenkette], [Dateipfad],
   [Bildunterschrift], [Zeichenkette], [Optionale Beschreibung],
-  [AltText],
+  [AlternativText],
   [Zeichenkette],
   [Text der angezeigt werden kann, wenn die Datei nicht geladen wird (z.B. schlechte Internet-Verbindung). Besonders relevant bei Bildern],
 )<ref:datei>
@@ -1705,4 +1711,5 @@ entfällt
     erforderlich (in der Realität natürlich schon!).",
 )
 
-#include "diagram_raws/UseCaseDiagram/usecasediagram.typ"
+#include "diagrams/UseCaseDiagram/usecasediagram.typ"
+#include "diagrams/Analyseklassendiagramm/analyseklassendiagramm.typ"
