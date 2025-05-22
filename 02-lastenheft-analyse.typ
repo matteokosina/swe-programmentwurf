@@ -4,10 +4,13 @@
 #import "@preview/codly-languages:0.1.1": *
 
 #show: codly-init.with()
-#codly(number-format: none, languages: (
-  HTTP: (name: " HTTP", icon: "🌐", color: rgb("#2b9dce")),
-  JSON: (name: " JSON", icon: "{}", color: rgb("#2b9dce")),
-))
+#codly(
+  number-format: none,
+  languages: (
+    HTTP: (name: " HTTP", icon: "🌐", color: rgb("#2b9dce")),
+    JSON: (name: " JSON", icon: "{}", color: rgb("#2b9dce")),
+  ),
+)
 
 #let questionCount = state("q", 1)
 
@@ -29,12 +32,17 @@
           color += 1
         }
 
-        strong((
-          "",
-          text(fill: questionColor, [Frage #context { questionCount.get() }:]),
-          text(fill: answerColor, "Antwort:"),
-          text(fill: internColor, [_Intern_:]),
-        ).at(color))
+        strong(
+          (
+            "",
+            text(
+              fill: questionColor,
+              [Frage #context { questionCount.get() }:],
+            ),
+            text(fill: answerColor, "Antwort:"),
+            text(fill: internColor, [_Intern_:]),
+          ).at(color),
+        )
       },
       number-align: left,
     )
@@ -63,7 +71,7 @@
         }
       ])
     }
-    
+
     if internal_remark != "" {
       enum.item([
         #text(fill: internColor, emph(internal_remark))
@@ -394,7 +402,7 @@ integriert werden. \
     Mitarbeiter-ID abhängig ist, gibt den Lohn des entsprechenden Mitarbeiters
     zurück. Eine Beispiel Anfrage für den Mitarbeiter mit der Mitarbeiter-ID
     0815 sähe dann so aus:
-    ```HTTP
+    #emph(```HTTP
     GET <base-url>/getLohn?mitarbeiter=0815
     RESPONSE: 200 OK
     {
@@ -403,7 +411,7 @@ integriert werden. \
       „name“: „John Doe“,
       „iban“: „DE12 3456 7890 1234 5678 90“
     }
-    ```
+    ```)
   ],
 )
 
@@ -783,13 +791,15 @@ werden können.\
       question: "Welches Format haben die Zeichenkettenlisten?",
       answer: [Sie sind im CSV Format, und ist wie folgt definiert:
         #table(
-          columns: 6, table.header(
-          [*Produktname*],
-          [*ProduktID*],
-          [*Hersteller*],
-          [*Lieferant*],
-          [*PreisProStk*],
-          [*Beschreibung*]),
+          columns: 6,
+          table.header(
+            [*Produktname*],
+            [*ProduktID*],
+            [*Hersteller*],
+            [*Lieferant*],
+            [*PreisProStk*],
+            [*Beschreibung*],
+          ),
 
           [Betonschraube Ultracut FBS II],
           [25243996],
@@ -802,10 +812,10 @@ werden können.\
         )
       ],
       internal_remark: [Daraus folgt dieses CSV-Schema:
-        ```CSV
+        #emph(```CSV
           Produktname;ProduktID;Hersteller;Lieferant; PreisProStk;Beschreibung
           Betonschraube Ultracut FBS II;25243996;FISCHER;Bauhaus;2.6;Sechskantkopf, 10 x 120 mm,
-        ```],
+        ```)],
     )
 
     #qa(
@@ -1032,7 +1042,7 @@ werden können.\
         Auch hier bietet das FibuSys bietet dafür eine HTTP REST
         Schnittstelle an, die im JSON-Format kommuniziert. Der Endpoint ist
         `GET <base-url>/getOrders`. Beispielausgabe:
-        ```JSON
+        #emph(```JSON
         {
             "Orders": [
                 {
@@ -1061,7 +1071,7 @@ werden können.\
                 }
             ]
         }
-        ```
+        ```)
       ],
     )
   ],
@@ -1193,18 +1203,18 @@ werden können.\
   [
     Die Daten sollen in einer zentralen Datenbasis abgespeichert werden.\
     #qa(
-    question: "Zentrale Datenbasis pro Handwerksbetrieb oder eine große zentrale Datenbasis für alle?",
-    answer: "Handwerksbetriebe haben alle einen lokalen Server (siehe oben)",
+      question: "Zentrale Datenbasis pro Handwerksbetrieb oder eine große zentrale Datenbasis für alle?",
+      answer: "Handwerksbetriebe haben alle einen lokalen Server (siehe oben)",
     )
     #qa(
-    question:"Sollen die Clients auch offline funktionieren und die Daten dann bei Internet-Verbindung synchronisieren?",
-    answer: "Nein, diese Funktion ist nicht vorgesehen (siehe oben)"
+      question: "Sollen die Clients auch offline funktionieren und die Daten dann bei Internet-Verbindung synchronisieren?",
+      answer: "Nein, diese Funktion ist nicht vorgesehen (siehe oben)",
     )
   ],
 )
 #qa(
   internal_remark: "Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung
-       vorgenommen:"
+       vorgenommen:",
 )
 
 *Mitarbeiter / Personaldaten*
@@ -1239,9 +1249,18 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [Mitarbeiter], [Referenz auf Mitarbeiter], [Verweis auf Mitarbeiter, dem die GUI-Konfiguration gehört],
-  [Schriftart], [Zeichenkette], [Gibt den Namen der Schriftart an, in welcher die Texte in der GUI erscheinen],
-  [Schriftgröße], [Gleitkommazahl], [Gibt die Schriftgröße des angezeigten Textes an],
+  [Mitarbeiter],
+  [Referenz auf Mitarbeiter],
+  [Verweis auf Mitarbeiter, dem die GUI-Konfiguration gehört],
+
+  [Schriftart],
+  [Zeichenkette],
+  [Gibt den Namen der Schriftart an, in welcher die Texte in der GUI erscheinen],
+
+  [Schriftgröße],
+  [Gleitkommazahl],
+  [Gibt die Schriftgröße des angezeigten Textes an],
+
   [Akzentfarbe],
   [RGB(Ganzzahl, Ganzzahl, Ganzzahl)],
   [Beschreibt die Farbe für vorgehobene Inhalte (z.B. Farbe eines Primärbuttons)],
@@ -1265,7 +1284,9 @@ werden können.\
   ),
 
   [Titel], [Zeichenkette], [Bezeichnung der Rolle],
-  [Zugriffsrechte], [Referenzen auf Zugriffsrechte], [Verweise auf die Zugriffsrechte der Rolle],
+  [Zugriffsrechte],
+  [Referenzen auf Zugriffsrechte],
+  [Verweise auf die Zugriffsrechte der Rolle],
 )<ref:rolle>
 *Zugriffsrechte*
 #table(
@@ -1277,9 +1298,11 @@ werden können.\
     [#text(fill: white, weight: "bold")[Beschreibung]],
   ),
 
-  [Bezugsobjekt], [Zeichenkette], [Ziel des Zugriffsrechts (z.B. Termine, Aufträge, Personaldaten)],
-  [Art], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
+  [Bezugsobjekt],
+  [Zeichenkette],
+  [Ziel des Zugriffsrechts (z.B. Termine, Aufträge, Personaldaten)],
 
+  [Art], [Zeichenkette], [Art der Zugriffsrechte (Vollzugriff, Lesend etc.)],
 )<ref:zugriffsrecht>
 #pagebreak(weak: true)
 *Lieferanten*
@@ -1313,10 +1336,22 @@ werden können.\
   ),
 
   [Kundennummer], [Ganzzahl], [Eindeutige Kennung für den Kunden],
-  [FirmenName], [Zeichenkette], [Firmen Name (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
-  [Steuernummer], [Zeichenkette], [Steuernummer (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
-  [Vorname], [Zeichenkette], [Vorname des Kunden / der Ansprechperson bei der Firma],
-  [Nachname], [Zeichenkette], [Nachname des Kunden / der Ansprechperson bei der Firma],
+  [FirmenName],
+  [Zeichenkette],
+  [Firmen Name (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
+
+  [Steuernummer],
+  [Zeichenkette],
+  [Steuernummer (falls es ein Firmenkunde ist, ansonsten leere Zeichenkette)],
+
+  [Vorname],
+  [Zeichenkette],
+  [Vorname des Kunden / der Ansprechperson bei der Firma],
+
+  [Nachname],
+  [Zeichenkette],
+  [Nachname des Kunden / der Ansprechperson bei der Firma],
+
   [Strasse], [Zeichenkette], [Straßenname],
   [Hausnummer], [Zeichenkette], [Hausnummer],
   [Postleitzahl], [Zeichenkette], [Postleitzahl],
@@ -1497,9 +1532,9 @@ werden können.\
 *Werkzeug (und Anlagen)*
 
 #qa(
-question: "Kann ein Werkzeug in mehreren Aufträgen verwendet werden?",
-answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden.",
-internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
+  question: "Kann ein Werkzeug in mehreren Aufträgen verwendet werden?",
+  answer: "Ja, ein Werkzeug kann in mehreren Aufträgen verwendet werden.",
+  internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein",
 )
 #table(
   columns: 3,
@@ -1590,7 +1625,13 @@ internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
   columns: (auto, 1fr, 1fr, 1fr, 1.5fr),
   align: left,
   fill: (x, y) => if y == 0 { rgb("#e6e6e6") },
-  table.header([Produktqualität], [sehr gut], [gut], [normal], [nicht relevant]),
+  table.header(
+    [Produktqualität],
+    [sehr gut],
+    [gut],
+    [normal],
+    [nicht relevant],
+  ),
 
   [
     Funktionalität
@@ -1643,12 +1684,12 @@ internal_remark: "\"GenutztIn\" muss eine Liste von AuftragIDs sein"
 
 #qa(
   question: "Wer soll das Produkt am Ende warten?",
-  answer: "Wir haben IT-Experten, welche die Wartung des Produktes durchführen werden"
-  )
+  answer: "Wir haben IT-Experten, welche die Wartung des Produktes durchführen werden",
+)
 #qa(
   question: "Bezüglich Zuverlässigkeit: Muss die zentrale Datenbasis darauf extra ausgerichtet sein – Stichwort High Availability? Also ist es ein Problem für Sie, wenn der Server mal nicht erreichbar ist, oder muss er 24/7 immer erreichbar sein?",
   answer: "Wenn der Server mal 15 Minuten nicht erreichbar ist, ist das schade, aber dafür möchten wir keine Unsummen aufbringen, um das zu verhindern. Konzentrieren Sie sich lieber auf die Benutzbarkeit!",
-  internal_remark: "Ein normaler Server reicht vollkommen aus."
+  internal_remark: "Ein normaler Server reicht vollkommen aus.",
 )
 
 == Aufgaben
