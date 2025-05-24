@@ -11,7 +11,7 @@ ANFANG AuftragDurchführen
 
 	MehrfachSuche(Eigenauftrag)
 	"Im Kontext von" der Eigentaufträge auf Auftrag setzen
-	Eigenaufträge hinzugüfen zu Auftrag hinzufügen
+	Eigenaufträge zu Auftrag hinzufügen
 
 	WENN Material aus dem Lager genommen wird
 		EinzelSuche(LagerEintrag)
@@ -42,7 +42,7 @@ ANFANG AuftragErstellen
 	ENDE-WENN
 
 
-	initiales AngebotErstellen
+	Initiales AngebotErstellen
 	SOLANGE Angebot nicht akzeptiert wurde
 		Angebot verhandeln
 	ENDE-SOLANGE
