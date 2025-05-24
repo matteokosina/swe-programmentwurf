@@ -47,31 +47,31 @@ ENDE WENN
 ```
 Kundenauftrag auswählen
 Finales, verknüpftes Angebot auswählen
+// Was wird mit dem Ergebnis der Prüfungen gemacht?
 Prüfen, ob bestehende verknüpfte Lieferaufträge existieren
 Prüfen ob eine Vorlage für Bestellgruppe in verknüpftem Lieferauftrag verwendet wird
+// Was genau kann das vorlagen system und warum kann man damit alles skipen?
 WENN Vorlage vorhanden
     Vorlage suchen
     Vorlage auswählen
     Vorlage Bestellung hinzufügen
 SONST
     FÜR-ALLE Materialposten des finalen Angebots 
+        // Suchen klingt nach aussuchen, hier gibt es ja eine eindeutige Referenz
         Produkt suchen
         Lagerbestand prüfen 
         WENN nicht genug verfügbar
-            Prüfen ob Hauptlieferant vorhanden
-            WENN kein Hauptlieferant
-                Bestelliste anzeigen
-                Material suchen 
-                WENN Material gefunden
-                    Angebote vergleichen
-                SONST
-                    Lieferanten recherchieren
-                    Lieferant auswählen
-                    Lieferant kontaktieren 
-                    Angebote empfangen
-                    Lieferant anlegen
-                ENDE-WENN
+            // Hauptlieferant(schlecht bennant) ist eine Liste von Lieferanten eines Produkts, hier würde ich "Lieferant auswählen" oder so machen
+            Lieferant aus Hauplieferanten auswählen
+            WENN neuer Lieferant gebraucht wird
+                Lieferanten recherchieren
+                Lieferant auswählen
+                Lieferant kontaktieren 
+                Angebote empfangen
+                Lieferant anlegen
             ENDE-WENN
+
+            // Was genau ist das ausgewählte Angebot? hier wird doch in jeden Fall bestellt und ein neuer Eigenauftrag angelegt, oder?
             Lieferantenangebot auswählen 
             WENN bereits ein Angebot gewählt wurde
                 Prüfe ob die Lieferanten übereinstimmen
@@ -86,7 +86,10 @@ SONST
             ENDE-WENN
         ENDE-WENN
     ENDE-FÜR-ALLE
+    // Es gibt mehrere Bestellungen, oder? Deswegen hätte ich das im loop gemacht
     Bestellung mit allen Eigenaufträgen absenden
+
+    // Ich glaube fehlerbehandlung kann man hier 
     WENN Bestellbestätigung erhalten -> Rechnung erhalten //Rechnung als Output der Bestellbestätigung
         Rechnung archivieren (Rechnung) //Rechnung als Input für das Archivieren der Rechnung
     SONST
@@ -102,10 +105,14 @@ ENDE-WENN
 Öffne Lieferanten-Editor
 
 Neuen Lieferanten hinzufügen
+// Lieferant ist geschäftspartner und hat somit Referenzen auf Kontaktpersonen, Vertreter und eine Rechnungsaddresse
 Attribute (Name, Steuernummer) hinzufügen
 FÜR-ALLE Produkte eines Lieferanten
     Produkt der Bestellliste hinzufügen 
+    // vlt hier noch das:
+
     Attribute (ProduktID, Name, Beschreibung, Hersteller, Stückpreis) hinzufügen
+    // Hier werden keine Angebote oder Rechnungen erstellt, also keine Posten. Nur 
     WENN kein passender Produktposten vorhanden
         neuen Produktposten erstellen 
     ENDE-WENN
