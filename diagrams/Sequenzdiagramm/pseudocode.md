@@ -4,10 +4,6 @@ Da es ein Auftrag ist, den der Handwerksbetrieb durchführt, handelt es sich im 
 
 ```
 ANFANG AuftragDurchführen
-	WENN Mitarbeiter hat keine Berechtigung
-		Vorgang abbrechen
-		return
-	ENDE-WENN
 
 	AuftragErstellen
 
@@ -165,3 +161,17 @@ ANFANG MehrfachSuche(Datenart)
 	GEBE alle Elemente ZURÜCK
 ENDE MehrfachSuche 
 ```
+
+
+Verfeinern:
+
+Auftrag durchführen
+
+Auftrag erstellen
+
+Angebot erstellen
+
+Posten erstellen
+
+
+Schreiben welche vertieft wurde und welche nicht (verschiedene Farben)
