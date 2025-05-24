@@ -75,7 +75,7 @@ ENDE PostenErstellen
 
 ANFANG KundeErstellen
 	KundenNummer generieren
-	WENN Firmenkund
+	WENN Firmenkunde
 		Attribute(Name, Steuernummer) setzen
 	ENDE-WENN
 	Rechnungsaddresse erstellen
