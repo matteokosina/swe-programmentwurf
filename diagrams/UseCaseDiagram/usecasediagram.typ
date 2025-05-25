@@ -5,8 +5,9 @@ Das Diagramm zeigt die Use-Cases, die unser Programm abdecken soll. Dabei haben 
 Um es für den Benutzer möglichst einfach zu halten, haben wir uns dafür entschieden, einen Daten-getriebenen Ansatz zu wählen: Da die Verwaltung von Kundendaten, Termindaten, Materialdaten, Angeboten, Lieferungen, ... nahezu identisch sind, sind diese nicht als eigene Use-Cases eingearbeitet, sondern in einem "Verwalten"-Use-Case zusammengefasst.
 
 == Verwaltungssoftware - Hauptsystem
-#image("Verwaltungssoftware.svg")
-
+#figure(
+  image("Verwaltungssoftware.svg"),
+)<fig:kernfunktionalitaeten>
 Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und deren Beziehung zu den verschiedenen Akteuren dar. Diese übergeordnete Darstellung bietet einen Gesamtüberblick über die Systemfunktionen.
 
 #pagebreak(weak: true)
@@ -39,8 +40,9 @@ Das erste Diagramm stellt die Kernfunktionalitäten der Verwaltungssoftware und 
 In dem Kommentar ist weiter definiert, auf welche Daten sich der "Verwalten"-Use-Case genau bezieht.
 
 == Verfeinerung: Verwalten
-#image("Verwalten _ Verfeinerung.svg")
-
+#figure(
+  image("Verwalten _ Verfeinerung.svg"),
+)<fig:verfeinerung-verwalten>
 Das zweite Diagramm detailliert den "Verwalten" Use Case aus dem Hauptdiagramm und zeigt die spezifischen Verwaltungsfunktionen, die im System verfügbar sind.
 
 - *Anlegen*: Eine zentrale Funktion zum Erstellen neuer Datensätze im System.
@@ -60,8 +62,9 @@ Das zweite Diagramm detailliert den "Verwalten" Use Case aus dem Hauptdiagramm u
 Diese Funktionen werden durch verschiedene Akteure ausgeführt. Der Administrator hat Zugriff auf Importieren und Exportieren, während der Vorgesetzte mit Anzeigen und Ändern interagiert.
 
 == Verfeinerung: Ändern
-#image("Ändern _ Verfeinerung.svg")
-
+#figure(
+  image("Ändern _ Verfeinerung.svg"),
+)<fig:verfeinerung-aendern>
 Dieses Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und zeigt den Prozess der Datenanpassung mit den erforderlichen Validierungsschritten.
 
 - *Daten anpassen*: Der übergeordnete Use Case, der den gesamten Änderungsprozess umfasst und von einem Vorgesetzten initiiert wird.
@@ -77,7 +80,9 @@ Dieses Diagramm detailliert den "Ändern" Use Case aus dem zweiten Diagramm und 
 Die blaue Notiz im Diagramm erklärt den Prozessablauf: Zuerst müssen die Datenfelder angepasst werden, dann werden die Daten vom System validiert, und schließlich muss der Benutzer die Änderungen reviewen und bestätigen.
 
 == Verfeinerung: Daten validieren am Beispiel der Terminverwaltung
-#image("Daten validieren (Terminverwaltung) Vefeinerung.svg")
+#figure(
+  image("Daten validieren (Terminverwaltung) Vefeinerung.svg"),
+)<fig:verfeinerung-validieren-terminverwaltung>
 
 Dieses Diagramm fokussiert sich auf einen spezifischen Aspekt des Systems: die Validierung von Termindaten. Als Akteur tritt hier nur das System auf, das alle Daten validieren bzw. eine ID generieren muss.
 
