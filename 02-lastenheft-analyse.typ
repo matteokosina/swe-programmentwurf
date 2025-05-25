@@ -1713,3 +1713,4 @@ entfällt
 
 #include "diagrams/UseCaseDiagram/usecasediagram.typ"
 #include "diagrams/Analyseklassendiagramm/analyseklassendiagramm.typ"
+#include "diagrams/UImockups/UImockups.typ"
