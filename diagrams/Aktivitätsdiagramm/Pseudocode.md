@@ -2,49 +2,6 @@
 
 Die Aktion "Materialbestellungen für obigen Auftrag durchführen“ von der Bestandsprüfung der für einen Auftrag nötigen Materialien bis zur Verwaltung der Rechnung
 ```
-WENN Material nicht verfügbar
-    In das Bestellunterprogramm navigieren
-
-    // Prüfen ob bestehende verknüpfte Lieferaufträge existieren
-    Prüfen ob eine Vorlage für Bestellgruppe verwendet wird
-    WENN Vorlage vorhanden
-        Vorlage suchen
-        Vorlage auswählen
-        Vorlage Bestellung hinzufügen
-    ENDE WENN
-    SOLANGE weiteres Material für einen Angebotsposten benötigt wird
-        Auswahlliste anzeigen
-        Material suchen 
-        WENN Material gefunden
-            Angebote vergleichen
-        SONST
-            Lieferanten recherchieren
-            Lieferant auswählen
-            Lieferant kontaktieren 
-            Angebote empfangen
-            Neuen Lieferanten anlegen
-        ENDE WENN
-        Lieferantenangebot auswählen 
-        WENN bereits ein Angebot gewählt wurde
-            Prüfe ob die Lieferanten übereinstimmen
-                WENN die Lieferanten nicht übereinstimmen
-                    Neuen Eigenauftrag für Bestellung anlegen (Für Verfeinerung vgl. Auftrag anlegen)
-                    Eigenauftrag in Kontext des Kundenauftrags setzen
-                    Eigenauftrag als verknüpften Auftrag des Kundenauftrags hinzufügen
-                ENDE WENN
-        ENDE WENN
-        Material dem passenden Bestellauftrag hinzufügen
-    ENDE SOLANGE
-    Bestellung absenden
-    WENN Bestellbestätigung erhalten -> Rechnung erhalten //Rechnung als Output der Bestellbestätigung
-        Rechnung archivieren (Rechnung) //Rechnung als Input für das Archivieren der Rechnung
-    SONST 
-        Neue Bestellung mit anderem Lieferanten anlegen
-    ENDE WENN
-ENDE WENN
-```
-### Versuch 2
-```
 Kundenauftrag auswählen
 Finales, verknüpftes Angebot auswählen
 FÜR-ALLE Materialposten des finalen Angebots 
@@ -59,7 +16,6 @@ FÜR-ALLE Materialposten des finalen Angebots
             Lieferant anlegen
             Lieferant auswählen
         ENDE-WENN
-        Lieferant aus Hauptlieferanten auswählen 
         WENN Lieferant bereits eine offene Bestellung hat
             Material dem vorhandenen Eigenauftrag mit selbem Lieferanten hinzufügen
         SONST 
@@ -86,7 +42,7 @@ ENDE-WENN
 
 Neuen Lieferanten hinzufügen
 
-Attribute (Name, Steuernummer) hinzufügen
+Attribute setzen (Name, Steuernummer)
 Rechnungsadresse erstellen 
 Attribute setzen (Postleitzahl, Stadt, Straße, Hausnummer)
 Referenz auf Rechnungsadresse hinzufügen
@@ -97,7 +53,7 @@ Vertreter hinzufügen
 
 FÜR-ALLE Produkte eines Lieferanten
     Produkt der Bestellliste hinzufügen 
-    Attribute (ProduktID, Name, Beschreibung, Hersteller, Stückpreis) hinzufügen
+    Attribute setzen (ProduktID, Name, Beschreibung, Hersteller, Stückpreis)
     WENN Hauptlieferant des Produktes
         Produkt mit Lieferant als Hauptlieferant verknüpfen
     ENDE-WENN
@@ -134,7 +90,7 @@ SONST-WENN Adresse als Kontaktmöglichkeit vorhanden
     Briefumschlag verschließen
     Brief wegbringen
 SONST
-    Neuen Lieferanten suchen (keine Kontaktdaten vorhanden)
+    Neuen Lieferanten suchen //keine Kontaktdaten vorhanden
 ENDE WENN
 ```
 ## Rechung archivieren (Rechnung)
@@ -146,5 +102,3 @@ WENN Rechnung nicht in PDF Format
 ENDE WENN
 Rechnung dem Eigenauftrag der Bestellung anhängen
 ```
-
-Verfeinern: Lieferant anlegen und evtl noch die anderen aus dem Prozess
