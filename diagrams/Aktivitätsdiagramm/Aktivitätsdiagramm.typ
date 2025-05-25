@@ -1,6 +1,8 @@
 == Aktivitätsdiagramme
 Aktivitätsdiagramme werden zur Modellierung beliebiger prozedualer Abläufe verwendet. 
 Diese veranschaulichen somit komplexe Verläufe, Nebenläufigkeiten oder auch alternative Veranschaulichungswege, um ein klares Verständins der gewünschten Abläufe eines Produkets zwischen Auftraggeber und -nehmer zu gewährleisten.
+
+Bei diesem Diagrammen werden für eine bessere Übersicht ineinanderliegende Entscheidungsknoten und Schleifen in unterschiedlichen Farben gekennzeichnet.
 === Materialbestellung
 #image("Aktivitätsdiagramm.svg")
 
@@ -17,3 +19,6 @@ Im Pseudocode sind zusätzlich die Prozesse "Lieferant anlegen", "Lieferant kont
 #image("Aktivitätsdiagramm-LieferantAnlegen.svg")
 
 Zur Veranschaulichung einer Verfeinerung in einem Aktivitätsdiagramm wurde der Prozess des Anlegens eines neuen Lieferantens gewählt. 
+
+Hierbei wird der Lieferant zunächst mit allen nötigen Attributen und Referenzen erstellt.
+Von diesem werden anschließend alle Produkte der Bestelliste hinzugefügt, wobei dieser potentiell noch als Hauptlieferant gekennzeichnet wird. 

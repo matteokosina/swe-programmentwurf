@@ -1,3 +1,5 @@
 #import "template/template.typ"
 
-= Analyse
+= Sequenz- und Aktivitätsdiagramm
+#include "diagrams/Sequenzdiagramm/Sequenzdiagram.typ"
+#include "diagrams/Aktivitätsdiagramm/Aktivitätsdiagramm.typ"

@@ -342,7 +342,7 @@
       ><text x="26" xml:space="preserve" y="31" clip-path="url(#clipPath9)" stroke="none"
       >Name, Beschreibung, ...</text
     ></g
-    ><g font-size="11px" transform="translate(303,670)" fill-opacity="1" fill="rgb(122,207,245)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(122,207,245)" stroke-opacity="1"
+    ><g font-size="11px" transform="translate(303,670)" fill-opacity="1" fill="rgb(192,192,255)" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="rgb(192,192,255)" stroke-opacity="1"
     ><rect x="0" y="0" clip-path="url(#clipPath24)" width="220" rx="15" ry="15" height="180" stroke="none"
     /></g
     ><g fill-opacity="1" text-rendering="geometricPrecision" stroke="black" stroke-linecap="round" transform="translate(303,670)" stroke-miterlimit="0" stroke-opacity="1" fill="black" stroke-dasharray="12,9" font-family="sans-serif" stroke-linejoin="round" font-size="11px" image-rendering="optimizeQuality"
