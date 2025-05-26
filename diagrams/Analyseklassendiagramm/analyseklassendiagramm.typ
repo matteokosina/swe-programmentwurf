@@ -3,8 +3,7 @@
   image("Klassendiagramm.svg"),
   caption: "Analyse-Klassendiagramm",
 )<fig:analyse-klassendiagramm>
-Es wurden verschiedene Analysemuster eingesetzt:
-
+Es wurden verschiedene Entwurfsmuster eingesetzt:
 
 In der Modellierung wurde berücksichtigt, dass Kunde und Lieferant beide von Geschäftspartner erben, jedoch besitzt ein Kunde sowohl Rechungs- als auch Lieferadresse, Lieferanten jedoch nur eine Rechnungsadresse, da an diese nichts geliefert wird. Daher wurde die Entscheidung getroffen, die Adress-Felder aufzuteilen. Daher besitzt nun ein Geschäftspartner eine Rechnungsadresse und nur der Kunde eine Lieferadresse.
 
