@@ -3,13 +3,14 @@ Aktivitätsdiagramme werden zur Modellierung beliebiger prozedualer Abläufe ver
 Diese veranschaulichen somit komplexe Verläufe, Nebenläufigkeiten oder auch alternative Veranschaulichungswege, um ein klares Verständins der gewünschten Abläufe eines Produkets zwischen Auftraggeber und -nehmer zu gewährleisten.
 
 Bei diesem Diagrammen werden für eine bessere Übersicht ineinanderliegende Entscheidungsknoten und Schleifen in unterschiedlichen Farben gekennzeichnet.
+Zusätzlich sind Prozesse, welche in Pseudocode und in einem Aktivitätsdiagramm verfeinert wurden, in Rosa markiert, sowie Prozesse, welche nur in Pseudocode verfeinert wurden, in Orange.
 === Materialbestellung
 #image("Aktivitätsdiagramm.svg")
 
 Für die Modellierung eines Aktivitätsdiagrammes wurde hierbei der Prozess einer Materialbestellung gewählt. Dieser hat als Eingabewert den Kundenauftrag, welcher bereits mit einem gewählten Angebot verknüpft wurde. 
 Von diesem Angebot werden anschließend alle Materialposten auf eine vollständige Verfügbarkeit überprüft und je nach Lagerbestand eine entsprechende Nachbestellung eingeleitet oder nicht. 
 
-Hierbei ist zu beachten, dass  erst nach der Überprüfung aller nötigen Materialposten die Bestellung abgesendet wird. Dadurch werdern Materialien, welche von dem selben Lieferanten beschaffen werden sollen, gemeinsam in einem Eigenauftrag bestellt und mehrere Einzelbestellungen vermieden.
+Hierbei ist zu beachten, dass  erst nach der Überprüfung aller nötigen Materialposten die Bestellung abgesendet wird. Dadurch werden Materialien, welche von dem selben Lieferanten beschaffen werden sollen, gemeinsam in einem Eigenauftrag bestellt und mehrere Einzelbestellungen vermieden.
 
 Ebenfalls wird bei nicht Erhaltung einer Bestellbestätigung überprüft, wodurch ein Fehler bei der Bestellung zustande gekommen ist. Da bei einer passenden Eingabe der nötigen Daten nur ein Fehler von Seite der Lieferanten entstehen kann, muss der entsprechende Lieferant geändert und die Bestellung erneut durchgeführt werden. 
 
@@ -70,7 +71,7 @@ ENDE Rechnung archivieren (Rechnung)
 Zur Veranschaulichung einer Verfeinerung in einem Aktivitätsdiagramm wurde der Prozess des Anlegens eines neuen Lieferantens gewählt. 
 
 Hierbei wird der Lieferant zunächst mit allen nötigen Attributen und Referenzen erstellt.
-Von diesem werden anschließend alle Produkte der Bestelliste hinzugefügt, wobei dieser potentiell noch als Hauptlieferant gekennzeichnet wird. 
+Von diesem werden anschließend alle Produkte der Bestelliste hinzugefügt, wobei dieser potentiell für das jeweilige Produkt als Hauptlieferant gekennzeichnet werden kann.
 
 ==== Pseudocode
 ```

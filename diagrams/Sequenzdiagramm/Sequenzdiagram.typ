@@ -6,18 +6,17 @@
 
 Für das Sequenzdiagramm haben wir exemplarisch den Prozess "Auftrag durchführen" gewählt.
 
-Die Referenzblöcke in diesem Diagramm sind Farbcodiert, sodass alles Blöcke, die verfeinert wurden, in grün dargestellt sind. Die Blöcke, die nicht verfeinert wurden, sind in orange dargestellt.
+Die Referenzblöcke in diesem Diagramm sind farbcodiert, sodass alle Blöcke, die verfeinert wurden, in grün dargestellt sind. Die Blöcke, die nicht verfeinert wurden, sind in orange dargestellt.
 
-Zubeginn wird ein Auftrag erstellt. Da Referenzblöcke keine Lifelines erstellen können, wird der Auftrag auf dieser Ebene schon erstellt und dann in dem Verfeinerungblock "Auftrag erstellen" weiterverarbeitet. Danach wird das für den Auftrag benötigte Material nachbestellt. Die Verfeinerung hierzu bleibt aus, da dieser auch ein großer Teil des Aktivitätsdiagramms ist.
+Zu Beginn wird ein Auftrag erstellt. Da Referenzblöcke keine Lifelines erstellen können, wird der Auftrag auf dieser Ebene schon erstellt und dann in dem Verfeinerungblock "Auftrag erstellen" weiterverarbeitet. Danach wird das für den Auftrag benötigte Material nachbestellt. Die Verfeinerung hierzu bleibt aus, da dieser Prozess im Aktivitätsdiagramm behandelt wird.
 
-Im Durchführungsteil kann der Auftrag editiert werden und Material aus dem Lager genommen werden. Dafür gibt es eine Schleife, in der immer wieder eine von vier Aktionen durchgeführt wird:
+Im Durchführungsteil kann der Auftrag editiert werden und Material aus dem Lager genommen werden. Dafür gibt es eine Schleife, welche in jeder Iteration eine der vier folgenden Aktionen durchführt:
 - Neuer Termin hinzufügen
 - Werkzeug hinzufügen
 - Bearbeiter hinzufügen
 - Material aus dem Lager nehmen
 
-Am Ende wird eine Rechnung erstellt, die den Auftrag abschließt, dazu werden die Angebotspostitionen in die Rechnung übernommen. Danach kann beliebig editiert werden und am Ende wird die Rechnung erstellt.
-
+Zum Abschluss des Auftrags werden die Angebotsposten in die Rechnung übernommen. Diese können anschließend beliebig editiert werden, bis die Rechnung erstellt wird. 
 
 ==== Pseudocode
 ```
@@ -58,12 +57,12 @@ ENDE AuftragDurchführen
 === Auftrag erstellen
 #image("AuftragErstellen.svg", width: 110%)
 
-In der Verfeinerung für die Auftragserstellen wird auch das Benutzerinterface in Form von "Hauptseite" und "Auftragsmenü" berücksichtigt. Aus Gründen der Übersichtlichkeit, wurde darauf in den anderen Sequenzdiagrammen verzichtet.
+In der Verfeinerung für die Auftragserstellen wird auch das Benutzerinterface in Form von "Hauptseite" und "Auftragsmenü" berücksichtigt. Aus Gründen der Übersichtlichkeit wurde darauf in den anderen Sequenzdiagrammen verzichtet.
 
 Zu Beginn navigiert sich der Mitarbeiter in das Auftragsmenü. Nach der Anlegung des Auftrags, können in beliebiger Reihenfolge Attribute und Referenzen auf Kunden und Mitarbeiter gesetzt werden.
 
-Danach wird ein initiales Angebot erstellt. Dieser Prozess wird weiter unten weiter verfeinert.
-Daraufhin folg wieder eine Schleife, in der drei Dinge passieren können:
+Anschließend wird ein initiales Angebot erstellt. Dieser Prozess wird im späteren Verlauf weiter verfeinert.
+Daraufhin folgt wieder eine Schleife, in der drei Dinge passieren können:
 - Ein weiteres Angebot wird vom Mitarbeiter erstellt
 - Der Kunde nimmt ein Angebot an
 - Der Kunde lehnt ein Angebot ab
@@ -96,8 +95,8 @@ ENDE AuftragErstellen
 
 In der Verfeinerung für die Angeboterstellung wird das Benutzerinterface zur Vereinfachung nicht berücksichtigt. Nach der Erstellung des Angebots und der Verknüpfung mit dem Auftrag, können eine beliebige Anzahl an Angebotsposten erstellt werden.
 
-Hier wird eine zwischen Dienstleistungs- und Produktposten unterschieden.
-Bei Produktposten muss aus allen Produkten das passende ausgewählt werdne. Danach wird das Produkt vom Posten referenziert und die Anzahl festgelegt.
+Hier wird zwischen Dienstleistungs- und Produktposten unterschieden.
+Bei Produktposten muss aus allen Produkten das passende ausgewählt werden. Danach wird das Produkt vom Posten referenziert und die Anzahl festgelegt.
 
 Zum Schluss wird der Posten bestätigt. Wenn der Mitarbeiter alle Posten erstellt hat, ist das Angebot fertig.
 
