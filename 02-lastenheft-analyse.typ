@@ -142,8 +142,8 @@ die auf Tablets oder Handys laufen können. \
 
 #qa(
   question: "Welche Display-Größen sollen für diese Web-Applikation unterstützt werden?",
-  answer: "Das meistverwendete Handy ist das IPhone 14, welches 6,1 Zoll groß ist und das meistverwendete Tablet ist das IPad Air, es hat bis zu 13 Zoll.",
-  internal_remark: "IPhone 14: 2532 x 1170 Pixel und IPad Air: 2732 x 2048 Pixel",
+  answer: "Das meistverwendete Handy ist das iPhone 14, welches 6,1 Zoll groß ist und das meistverwendete Tablet ist das iPad Air, es hat bis zu 13 Zoll.",
+  internal_remark: "iPhone 14: 2532 x 1170 Pixel und iPad Air: 2732 x 2048 Pixel",
 )
 
 #qa(
@@ -793,20 +793,20 @@ werden können.\
         #table(
           columns: 6,
           table.header(
-            [*Produktname*],
-            [*ProduktID*],
+            [*Produkt-name*],
+            [*Produkt-ID*],
             [*Hersteller*],
             [*Lieferant*],
-            [*PreisProStk*],
-            [*Beschreibung*],
+            [*PreisPro-Stk*],
+            [*Beschrei-bung*],
           ),
 
-          [Betonschraube Ultracut FBS II],
+          [Beton-schraube Ultracut FBS II],
           [25243996],
           [FISCHER],
           [Bauhaus],
           [2.6],
-          [Sechskantkopf,\ 10 x 120mm],
+          [Sechskant-kopf,\ 10 x 120mm],
 
           [...], [...], [...], [...], [...], [...],
         )
@@ -814,7 +814,7 @@ werden können.\
       internal_remark: [Daraus folgt dieses CSV-Schema:
         #emph(```CSV
           Produktname;ProduktID;Hersteller;Lieferant; PreisProStk;Beschreibung
-          Betonschraube Ultracut FBS II;25243996;FISCHER;Bauhaus;2.6;Sechskantkopf, 10 x 120 mm,
+          Betonschraube Ultracut FBS II;25243996;FISCHER;Bauhaus;2.6;Sechskantkopf, 10 x 120 mm
         ```)],
     )
 
@@ -1191,31 +1191,10 @@ werden können.\
   ],
 )
 
-*Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung vorgenommen:*
+#pagebreak(weak:true)
 
+_Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung vorgenommen:_
 
-=== Produktdaten
-#table(
-  columns: (auto, 1fr),
-  [
-    /LD10/
-  ],
-  [
-    Die Daten sollen in einer zentralen Datenbasis abgespeichert werden.\
-    #qa(
-      question: "Zentrale Datenbasis pro Handwerksbetrieb oder eine große zentrale Datenbasis für alle?",
-      answer: "Handwerksbetriebe haben alle einen lokalen Server (siehe oben)",
-    )
-    #qa(
-      question: "Sollen die Clients auch offline funktionieren und die Daten dann bei Internet-Verbindung synchronisieren?",
-      answer: "Nein, diese Funktion ist nicht vorgesehen (siehe oben)",
-    )
-  ],
-)
-#qa(
-  internal_remark: "Aufgrund der Angaben unseres Kunden, haben wir folgende Datenmodellierung
-       vorgenommen:",
-)
 
 *Mitarbeiter / Personaldaten*
 #table(
@@ -1692,6 +1671,7 @@ werden können.\
   internal_remark: "Ein normaler Server reicht vollkommen aus.",
 )
 
+#pagebreak(weak: true)
 == Aufgaben
 Es handelt sich hier um eine stark vereinfachte Verwaltungs-Software. Einzelne
 Lastenheftpunkte sind bewusst offengehalten. Denken Sie darüber nach, welche
