@@ -54,7 +54,7 @@ Alle Pflichtfelder sind durch ein \*-Symbol gekennzeichnet, um die Nutzerführun
 Klickt ein Nutzer egal auf welcher Seite der Anwendung auf seinen Namen oder sein Profilbild, öffnen sich die Profil-Einstellungen. Diese ermöglichen es dem Nutzer zum einen das Aussehen seiner Benutzeroberfläche anzupassen (Heller Modus, Dunkler Modus, Schriftart und -größe, etc.) und zum anderen seine persönlichen Daten zu verwalten (z.B. E-Mail-Adresse, Passwort, etc.).
 #figure(
   rect(image("profil_einstellungen.svg")),
-  caption: "Erstellen eines neuen Auftrags",
+  caption: "Profil-Einstellungen",
 )<fig:profil-einstellungen>  
 
 
